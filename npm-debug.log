@@ -1,0 +1,133 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Users\\Ronald\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'publish',
+1 verbose cli   '.' ]
+2 info using npm@3.10.8
+3 info using node@v4.6.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: 'C:\\EI\\Desarrollo\\TramiteDocumentarioFront',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory C:\Users\Ronald\AppData\Roaming\npm-cache\TramiteDocumentarioFront\1.0.0\package.tgz not in flight; packing
+9 verbose correctMkdir C:\Users\Ronald\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+10 info lifecycle TramiteDocumentarioFront@1.0.0~prepublish: TramiteDocumentarioFront@1.0.0
+11 silly lifecycle TramiteDocumentarioFront@1.0.0~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ 'C:\\Users\\Ronald\\AppData\\Roaming\\npm-cache\\TramiteDocumentarioFront\\1.0.0\\package.tgz',
+12 verbose tar pack   'C:\\EI\\Desarrollo\\TramiteDocumentarioFront' ]
+13 verbose tarball C:\Users\Ronald\AppData\Roaming\npm-cache\TramiteDocumentarioFront\1.0.0\package.tgz
+14 verbose folder C:\EI\Desarrollo\TramiteDocumentarioFront
+15 verbose addLocalTarball adding from inside cache C:\Users\Ronald\AppData\Roaming\npm-cache\TramiteDocumentarioFront\1.0.0\package.tgz
+16 verbose correctMkdir C:\Users\Ronald\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+17 silly cache afterAdd TramiteDocumentarioFront@1.0.0
+18 verbose afterAdd C:\Users\Ronald\AppData\Roaming\npm-cache\TramiteDocumentarioFront\1.0.0\package\package.json not in flight; writing
+19 verbose correctMkdir C:\Users\Ronald\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+20 verbose afterAdd C:\Users\Ronald\AppData\Roaming\npm-cache\TramiteDocumentarioFront\1.0.0\package\package.json written
+21 silly publish { name: 'TramiteDocumentarioFront',
+21 silly publish   version: '1.0.0',
+21 silly publish   scripts:
+21 silly publish    { start: 'tsc && concurrently "npm run tsc:w" "npm run lite" ',
+21 silly publish      lite: 'lite-server',
+21 silly publish      postinstall: 'typings install',
+21 silly publish      tsc: 'tsc',
+21 silly publish      'tsc:w': 'tsc -w',
+21 silly publish      typings: 'typings' },
+21 silly publish   license: 'ISC',
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/ronaldmam/TramiteDocumentarioFront.git' },
+21 silly publish   bugs: { url: 'https://github.com/ronaldmam/TramiteDocumentarioFront/issues' },
+21 silly publish   homepage: 'https://github.com/ronaldmam/TramiteDocumentarioFront',
+21 silly publish   dependencies:
+21 silly publish    { '@angular/common': '2.0.0',
+21 silly publish      '@angular/compiler': '2.0.0',
+21 silly publish      '@angular/core': '2.0.0',
+21 silly publish      '@angular/forms': '2.0.0',
+21 silly publish      '@angular/http': '2.0.0',
+21 silly publish      '@angular/platform-browser': '2.0.0',
+21 silly publish      '@angular/platform-browser-dynamic': '2.0.0',
+21 silly publish      '@angular/router': '3.0.0',
+21 silly publish      '@angular/upgrade': '2.0.0',
+21 silly publish      'ag-grid': '^6.0.1',
+21 silly publish      'angular2-in-memory-web-api': '0.0.20',
+21 silly publish      bootstrap: '^3.3.6',
+21 silly publish      'core-js': '^2.4.1',
+21 silly publish      'reflect-metadata': '^0.1.3',
+21 silly publish      rxjs: '5.0.0-beta.12',
+21 silly publish      systemjs: '0.19.27',
+21 silly publish      'zone.js': '^0.6.23' },
+21 silly publish   devDependencies:
+21 silly publish    { concurrently: '^2.2.0',
+21 silly publish      'lite-server': '^2.2.2',
+21 silly publish      typescript: '^2.0.2',
+21 silly publish      typings: '^1.3.2' },
+21 silly publish   readme: 'ERROR: No README data found!',
+21 silly publish   _id: 'TramiteDocumentarioFront@1.0.0',
+21 silly publish   _shasum: 'b505c1921ef11422cda49446d40d45eee1fdd620',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name TramiteDocumentarioFront
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'TramiteDocumentarioFront',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'TramiteDocumentarioFront',
+26 silly mapToRegistry   name: 'TramiteDocumentarioFront',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/TramiteDocumentarioFront
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading C:\Users\Ronald\AppData\Roaming\npm-cache\TramiteDocumentarioFront\1.0.0\package.tgz
+30 verbose request uri https://registry.npmjs.org/TramiteDocumentarioFront
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 16:07:18
+33 verbose request using bearer token for auth
+34 verbose request id 2a314579920c3d3c
+35 http request PUT https://registry.npmjs.org/TramiteDocumentarioFront
+36 http 403 https://registry.npmjs.org/TramiteDocumentarioFront
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '95',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Wed, 05 Oct 2016 21:07:24 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-lax8629-LAX',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1475701644.511269,VS0,VE418',
+37 verbose headers   vary: 'Accept-Encoding' }
+38 verbose request invalidating C:\Users\Ronald\AppData\Roaming\npm-cache\registry.npmjs.org\TramiteDocumentarioFront on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: "You cannot publish over the previously published version 1.0.0." : TramiteDocumentarioFront
+40 verbose stack     at makeError (C:\Users\Ronald\AppData\Roaming\npm\node_modules\npm\node_modules\npm-registry-client\lib\request.js:302:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (C:\Users\Ronald\AppData\Roaming\npm\node_modules\npm\node_modules\npm-registry-client\lib\request.js:290:14)
+40 verbose stack     at Request._callback (C:\Users\Ronald\AppData\Roaming\npm\node_modules\npm\node_modules\npm-registry-client\lib\request.js:210:14)
+40 verbose stack     at Request.self.callback (C:\Users\Ronald\AppData\Roaming\npm\node_modules\npm\node_modules\request\request.js:187:22)
+40 verbose stack     at emitTwo (events.js:87:13)
+40 verbose stack     at Request.emit (events.js:172:7)
+40 verbose stack     at Request.<anonymous> (C:\Users\Ronald\AppData\Roaming\npm\node_modules\npm\node_modules\request\request.js:1044:10)
+40 verbose stack     at emitOne (events.js:77:13)
+40 verbose stack     at Request.emit (events.js:169:7)
+40 verbose stack     at IncomingMessage.<anonymous> (C:\Users\Ronald\AppData\Roaming\npm\node_modules\npm\node_modules\request\request.js:965:12)
+41 verbose statusCode 403
+42 verbose pkgid TramiteDocumentarioFront
+43 verbose cwd C:\EI\Desarrollo\TramiteDocumentarioFront
+44 error Windows_NT 10.0.10586
+45 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\Ronald\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "publish" "."
+46 error node v4.6.0
+47 error npm  v3.10.8
+48 error code E403
+49 error "You cannot publish over the previously published version 1.0.0." : TramiteDocumentarioFront
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
