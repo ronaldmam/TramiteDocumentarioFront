@@ -1,0 +1,42 @@
+<div >
+    <div class="panel panel-info" >
+        <div class="panel-heading sinpadding">  Bandeja de Entrada   </div>
+        <div class="panel-body sinpadding">
+            <div id="loader" style="display: none">
+                <i class="fa-spinner fa-spin fa-2x"> </i> Getting values
+            </div>
+            <div class="col-lg-5">
+                <input placeholder="Buscar..." type="text" ng-model="gridOptions.quickFilterText" />
+                <span>
+                    <label><input type="radio"  value="0" ng-model="bandeja" checked/> Pendiente</label>
+                    <label><input type="radio" value="1" ng-model="bandeja" /> Recibido</label>
+                </span>
+            </div>
+            <div class="col-lg-7" style="text-align:right">
+                <button ng-click="RecepcionarTramite()"  ng-hide="recibido"
+                        class="btn btn-succes" ng-disabled="btnRecibir">
+                    <i class="glyphicon glyphicon-plus"></i> Recibir
+                </button>
+                <button ng-click="DerivarTramiteMov()"
+                        class="btn btn-succes">
+                    <i class="glyphicon glyphicon-plus"></i> Derivar
+                </button>
+                <button ng-click="ArchivarTramiteMov()"
+                        class="btn btn-succes">
+                    <i class="glyphicon glyphicon-plus"></i> Archivar
+                </button>
+            </div>
+                      
+            <div ag-grid="gridOptions" style="height:250px" class="ag-blue col-lg-12"></div>
+          </div>
+        </div>
+    <div class="panel panel-info" > <!-- ng-controller="ng-AngularController" ng-init="cargar()"-->
+        <div class="panel-heading">  Movimientos de Tramite   </div>
+        <div class="panel-body">
+           <!-- <input placeholder="Buscar..." type="text" ng-model="gridOptions.quickFilterText" />-->
+
+            <div ag-grid="gridOptions2" style="height:250px" class="ag-blue"></div>
+        </div>
+   
+    </div>
+</div>
