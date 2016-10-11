@@ -2,6 +2,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { routing } from './app.routing';
+import { HttpModule }    from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes.component';
@@ -10,7 +11,7 @@ import { DashboardComponent }   from './dashboard.component';
 import { HeroService } from './hero.service';
 
 @NgModule({
-  imports:      [ BrowserModule ,  FormsModule, routing],
+  imports:      [ BrowserModule ,  FormsModule, HttpModule, routing],
   declarations: [ AppComponent,HeroesComponent, HeroDetailComponent, DashboardComponent, ],
   providers: [  HeroService  ],
   bootstrap:    [ AppComponent ]
