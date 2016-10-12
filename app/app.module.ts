@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { routing } from './app.routing';
 import { HttpModule }    from '@angular/http';
+import {AgGridModule} from 'ag-grid-ng2/main';
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes.component';
@@ -12,7 +13,7 @@ import { HeroService } from './hero.service';
 import { TramiteService } from './services/tramite.service';
 
 @NgModule({
-  imports:      [ BrowserModule ,  FormsModule, HttpModule, routing],
+  imports:      [ BrowserModule ,  FormsModule, HttpModule, routing,AgGridModule.withNg2ComponentSupport()],
   declarations: [ AppComponent,HeroesComponent, HeroDetailComponent, DashboardComponent, ],
   providers: [  HeroService, TramiteService  ],
   bootstrap:    [ AppComponent ]
