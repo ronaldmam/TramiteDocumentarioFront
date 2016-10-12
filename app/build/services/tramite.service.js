@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-var rxjs_1 = require('rxjs');
 require('../rxjs-extensions');
+var rxjs_1 = require('rxjs');
 //import 'rxjs/add/operator/toPromise';
 var TramiteService = (function () {
     function TramiteService(http) {
