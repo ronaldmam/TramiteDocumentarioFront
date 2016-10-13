@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http ,Response} from '@angular/http';
 import '../rxjs-extensions';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 
 //import 'rxjs/add/operator/toPromise';
 
@@ -15,7 +15,8 @@ export class TramiteService {
   	return this.http
              .get(this.baseUrl2+ 'getalltramitemovbyrecibir?codcap=${codcap}&id_usuario=${id_usuario}&recibido=${recibido}&superv=${superv}')
              .map((r: Response) => r.json().data )
-             .catch(this.handleError);
+             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+             //.catch(this.handleError);
 
   }
    // this could also be a private method of the component class

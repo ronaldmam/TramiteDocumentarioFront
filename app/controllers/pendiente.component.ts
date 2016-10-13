@@ -4,7 +4,7 @@ import {GridOptions} from 'ag-grid/main';
 
 import { TramiteService } from '../services/tramite.service';
 
-export class TramiteComponent { 
+export class PendienteComponent { 
 	private idCap:string='4004';
 	private idUsuario:string='00480798';
 	private recibido:boolean=false;
@@ -12,6 +12,7 @@ export class TramiteComponent {
 	private tramitePendiente:any=[];
 	private errorMessage:string='';
 	private isLoading: boolean = true;
+	private bandeja:string
 	//propieadades de la ng-grid
 	private gridOptions:GridOptions;
     private showGrid:boolean;
@@ -31,6 +32,7 @@ export class TramiteComponent {
 	}
 
 	ngOnInit(){
+		this.bandeja==this.bandejas[0].value
 		this.getAllPendiente(this.idUsuario,this.idCap,this.recibido,this.supervisor);
 		this.mostrarGrillaPendiente() ;
 
@@ -50,4 +52,8 @@ export class TramiteComponent {
 	       
 		}
 	}
+	public bandejas = [
+		{ value: 'p', display: 'Pendiente' },
+		{ value: 'r', display: 'Recibido' }
+	];
 }

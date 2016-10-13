@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('../rxjs-extensions');
-var rxjs_1 = require('rxjs');
+var Rx_1 = require('rxjs/Rx');
 //import 'rxjs/add/operator/toPromise';
 var TramiteService = (function () {
     function TramiteService(http) {
@@ -23,7 +23,8 @@ var TramiteService = (function () {
         return this.http
             .get(this.baseUrl2 + 'getalltramitemovbyrecibir?codcap=${codcap}&id_usuario=${id_usuario}&recibido=${recibido}&superv=${superv}')
             .map(function (r) { return r.json().data; })
-            .catch(this.handleError);
+            .catch(function (error) { return Rx_1.Observable.throw(error.json().error || 'Server error'); });
+        //.catch(this.handleError);
     };
     // this could also be a private method of the component class
     TramiteService.prototype.handleError = function (error) {
@@ -32,7 +33,7 @@ var TramiteService = (function () {
         var errorMsg = error.message; // || `Yikes! There was was a problem with our hyperdrive device and we couldn't retrieve your data!`
         console.error(errorMsg);
         // throw an application level error
-        return rxjs_1.Observable.throw(errorMsg);
+        return Rx_1.Observable.throw(errorMsg);
     };
     TramiteService = __decorate([
         core_1.Injectable(), 

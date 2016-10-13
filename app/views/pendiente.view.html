@@ -7,12 +7,12 @@
             </div>
             <div class="col-lg-5">
                 <input placeholder="Buscar..." type="text" ng-model="gridOptions.quickFilterText" />
-                <span>
-                    <label><input type="radio"  value="0" ng-model="bandeja" checked/> Pendiente</label>
-                    <label><input type="radio" value="1" ng-model="bandeja" /> Recibido</label>
+                <span *ngFor="let bande of bandeja">
+                    <label><input type="radio" name="bande" [value]="bande.value" [(ngModel)]="bandeja" checked/> {{bande.display}}</label>                    
+                    
                 </span>
             </div>
-            <div class="col-lg-7" style="text-align:right">
+      <!--<div class="col-lg-7" style="text-align:right">
                 <button ng-click="RecepcionarTramite()"  ng-hide="recibido"
                         class="btn btn-succes" ng-disabled="btnRecibir">
                     <i class="glyphicon glyphicon-plus"></i> Recibir
@@ -25,11 +25,11 @@
                         class="btn btn-succes">
                     <i class="glyphicon glyphicon-plus"></i> Archivar
                 </button>
-            </div>
+            </div>-->
                       
             <div ag-grid="gridOptions" style="height:250px" class="ag-blue col-lg-12"></div>
           </div>
-        </div>
+    </div>
     <div class="panel panel-info" > <!-- ng-controller="ng-AngularController" ng-init="cargar()"-->
         <div class="panel-heading">  Movimientos de Tramite   </div>
         <div class="panel-body">
