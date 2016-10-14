@@ -3,7 +3,10 @@ import {AgGridModule} from 'ag-grid-ng2/main';
 import {GridOptions} from 'ag-grid/main';
 
 import { TramiteService } from '../services/tramite.service';
-
+@Component({
+  selector: 'pendiente', 
+ template:'<div>hola</div>'// '/views/pendiente.view.html'
+})
 export class PendienteComponent { 
 	private idCap:string='4004';
 	private idUsuario:string='00480798';
@@ -32,6 +35,7 @@ export class PendienteComponent {
 	}
 
 	ngOnInit(){
+		this.idCap='4004';
 		this.bandeja==this.bandejas[0].value
 		this.getAllPendiente(this.idUsuario,this.idCap,this.recibido,this.supervisor);
 		this.mostrarGrillaPendiente() ;

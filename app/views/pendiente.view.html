@@ -7,7 +7,7 @@
             </div>
             <div class="col-lg-5">
                 <input placeholder="Buscar..." type="text" ng-model="gridOptions.quickFilterText" />
-                <span *ngFor="let bande of bandeja">
+                <span *ngFor="let bande of bandejas">
                     <label><input type="radio" name="bande" [value]="bande.value" [(ngModel)]="bandeja" checked/> {{bande.display}}</label>                    
                     
                 </span>
@@ -27,7 +27,7 @@
                 </button>
             </div>-->
                       
-            <div ag-grid="gridOptions" style="height:250px" class="ag-blue col-lg-12"></div>
+            <!--<div ag-grid="gridOptions" style="height:250px" class="ag-blue col-lg-12"></div>-->
           </div>
     </div>
     <div class="panel panel-info" > <!-- ng-controller="ng-AngularController" ng-init="cargar()"-->
@@ -35,7 +35,7 @@
         <div class="panel-body">
            <!-- <input placeholder="Buscar..." type="text" ng-model="gridOptions.quickFilterText" />-->
 
-            <div ag-grid="gridOptions2" style="height:250px" class="ag-blue"></div>
+           <!-- <div ag-grid="gridOptions2" style="height:250px" class="ag-blue"></div>-->
         </div>
    
     </div>
