@@ -9,13 +9,13 @@ import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { DashboardComponent }   from './dashboard.component';
-import { PendienteComponent } from './controllers/pendiente.component';
+import { BandejaComponent } from './controllers/bandeja.component';
 import { HeroService } from './hero.service';
 import { TramiteService } from './services/tramite.service';
 
 @NgModule({
   imports:      [ BrowserModule ,  FormsModule, HttpModule, routing,AgGridModule.withNg2ComponentSupport()],
-  declarations: [ AppComponent,HeroesComponent, HeroDetailComponent, DashboardComponent,PendienteComponent ],
+  declarations: [ AppComponent,HeroesComponent, HeroDetailComponent, DashboardComponent,BandejaComponent ],
   providers: [  HeroService, TramiteService  ],
   bootstrap:    [ AppComponent ]
 })

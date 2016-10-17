@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HeroesComponent }      from './heroes.component';
 import { DashboardComponent }   from './dashboard.component';
 import { HeroDetailComponent }   from './hero-detail.component';
-import { PendienteComponent }   from './controllers/pendiente.component';
+import { BandejaComponent }   from './controllers/bandeja.component';
 
 const appRoutes: Routes = [
   	{
@@ -16,14 +16,14 @@ const appRoutes: Routes = [
   		component: DashboardComponent
 	},
 	{
-   		path: 'pendiente',
-  		component: PendienteComponent
+   		path: 'bandeja',
+  		component: BandejaComponent
 	},
-	{
+	/*{
   		path: '',
   		redirectTo: '/dashboard',
 		  pathMatch: 'full'
-	},
+	},*/
 	{
 	  path: 'detail/:id',
 	  component: HeroDetailComponent

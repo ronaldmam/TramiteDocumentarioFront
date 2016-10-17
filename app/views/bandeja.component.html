@@ -6,7 +6,7 @@
                 <i class="fa-spinner fa-spin fa-2x"> </i> Getting values
             </div>
             <div class="col-lg-5">
-                <input placeholder="Buscar..." type="text" ng-model="gridOptions.quickFilterText" />
+                <input placeholder="Buscar..." type="text"  id="quickFilterInput" />
                 <span *ngFor="let bande of bandejas">
                     <label><input type="radio" name="bande" [value]="bande.value" [(ngModel)]="bandeja" checked/> {{bande.display}}</label>                    
                     
@@ -27,7 +27,17 @@
                 </button>
             </div>-->
                       
-            <!--<div ag-grid="gridOptions" style="height:250px" class="ag-blue col-lg-12"></div>-->
+            <ag-grid-ng2 #agGrid style="height:250px" class="ag-blue col-lg-12"
+                [gridOptions]="gridOptions"
+                [columnDefs]="columnDefs"               
+                [rowData]="rowData"
+                enableSorting
+                enableFilter 
+                rowSelection="single"
+                (rowSelected)="onRowSelected($event)"              
+                >
+
+            </ag-grid-ng2>
           </div>
     </div>
     <div class="panel panel-info" > <!-- ng-controller="ng-AngularController" ng-init="cargar()"-->
@@ -36,6 +46,16 @@
            <!-- <input placeholder="Buscar..." type="text" ng-model="gridOptions.quickFilterText" />-->
 
            <!-- <div ag-grid="gridOptions2" style="height:250px" class="ag-blue"></div>-->
+           <ag-grid-ng2 #agGrid style="height:250px" class="ag-blue col-lg-12"
+                [gridOptions]="gridOptions2"
+                [columnDefs]="columnDefs2"               
+                [rowData]="rowData2"
+                enableSorting
+                enableFilter 
+                rowSelection="single"
+                              
+                >
+            </ag-grid-ng2>
         </div>
    
     </div>

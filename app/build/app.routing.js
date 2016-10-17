@@ -3,7 +3,7 @@ var router_1 = require('@angular/router');
 var heroes_component_1 = require('./heroes.component');
 var dashboard_component_1 = require('./dashboard.component');
 var hero_detail_component_1 = require('./hero-detail.component');
-var pendiente_component_1 = require('./controllers/pendiente.component');
+var bandeja_component_1 = require('./controllers/bandeja.component');
 var appRoutes = [
     {
         path: 'heroes',
@@ -14,14 +14,14 @@ var appRoutes = [
         component: dashboard_component_1.DashboardComponent
     },
     {
-        path: 'pendiente',
-        component: pendiente_component_1.PendienteComponent
+        path: 'bandeja',
+        component: bandeja_component_1.BandejaComponent
     },
-    {
+    /*{
         path: '',
         redirectTo: '/dashboard',
-        pathMatch: 'full'
-    },
+          pathMatch: 'full'
+    },*/
     {
         path: 'detail/:id',
         component: hero_detail_component_1.HeroDetailComponent

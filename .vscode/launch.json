@@ -18,8 +18,9 @@
                 "NODE_ENV": "development"
             },
             "console": "internalConsole",
-            "sourceMaps": false,
-            "outFiles": []
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/app/build"
+            //"outFiles": []
         },
         {
             "name": "Attach",
@@ -28,7 +29,7 @@
             "port": 5858,
             "address": "localhost",
             "restart": false,
-            "sourceMaps": false,
+            "sourceMaps": true,
             "outFiles": [],
             "localRoot": "${workspaceRoot}",
             "remoteRoot": null
@@ -39,7 +40,7 @@
             "request": "attach",
             "processId": "${command.PickProcess}",
             "port": 5858,
-            "sourceMaps": false,
+            "sourceMaps": true,
             "outFiles": []
         }
     ]

@@ -21,10 +21,15 @@ var TramiteService = (function () {
     }
     TramiteService.prototype.getAllPendiente = function (codcap, id_usuario, recibido, superv) {
         return this.http
-            .get(this.baseUrl2 + 'getalltramitemovbyrecibir?codcap=${codcap}&id_usuario=${id_usuario}&recibido=${recibido}&superv=${superv}')
-            .map(function (r) { return r.json().data; })
+            .get(this.baseUrl2 + 'getalltramitemovbyrecibir?codcap=' + codcap + "&id_usuario=" + id_usuario + "&recibido=" + recibido + "&superv=" + superv) //${codcap}&id_usuario=${id_usuario}&recibido=${recibido}&superv=${superv}'
+            .map(function (r) { return r.json(); })
+            .catch(this.handleError);
+    };
+    TramiteService.prototype.getAllMovimientoTramite = function (_trMoid) {
+        return this.http
+            .get(this.baseUrl2 + 'getalltramitemovbytramite?trMoid=' + _trMoid)
+            .map(function (r) { return r.json(); })
             .catch(function (error) { return Rx_1.Observable.throw(error.json().error || 'Server error'); });
-        //.catch(this.handleError);
     };
     // this could also be a private method of the component class
     TramiteService.prototype.handleError = function (error) {

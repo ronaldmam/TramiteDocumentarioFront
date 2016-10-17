@@ -11,13 +11,19 @@ export class TramiteService {
   private baseUrl2: string = 'http://localhost:8081/TramiteDocumentarioJava/rest/tramitesmovi/';
   private tramitesPendiente:string[];
   constructor(private http: Http) { }
-	getAllPendiente(codcap: string, id_usuario:string, recibido:boolean,superv:boolean) {
+	getAllPendiente(codcap: string, id_usuario:string, recibido:string,superv:number) {
   	return this.http
-             .get(this.baseUrl2+ 'getalltramitemovbyrecibir?codcap=${codcap}&id_usuario=${id_usuario}&recibido=${recibido}&superv=${superv}')
-             .map((r: Response) => r.json().data )
-             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-             //.catch(this.handleError);
+             .get(this.baseUrl2+ 'getalltramitemovbyrecibir?codcap='+codcap + "&id_usuario=" + id_usuario + "&recibido=" + recibido + "&superv=" + superv) //${codcap}&id_usuario=${id_usuario}&recibido=${recibido}&superv=${superv}'
+             .map((r: Response) => r.json() )
+             //.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+             .catch(this.handleError);
 
+  }
+  getAllMovimientoTramite(_trMoid:number){
+    	return this.http
+             .get(this.baseUrl2+ 'getalltramitemovbytramite?trMoid='+_trMoid )
+             .map((r: Response) => r.json() )
+             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
    // this could also be a private method of the component class
   handleError (error: any) {
@@ -31,7 +37,6 @@ export class TramiteService {
   }
 
 	}
-
 
 
     
