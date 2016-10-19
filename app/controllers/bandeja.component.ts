@@ -74,15 +74,15 @@ export class BandejaComponent {
 	}
 	mostrarGrillaPendiente() {
 		this.pendientesPresentar=[];
-		let _valorDoc:string="";
+		let __valorDoc:string="";
 		for(let pendiente of this.tramitesPendiente ){
 			if (pendiente.TramCodEmisor!=null)
-				_valorDoc=pendiente.nombrecom;
+				__valorDoc=pendiente.nombrecom;
 			else
-				_valorDoc=pendiente.EnExNombre;
+				__valorDoc=pendiente.EnExNombre;
 			this.pendientesPresentar.push(
 				{
-					Id: pendiente.TramId, TramNumero: pendiente.TramNumero, NombreEmisor: _valorDoc,
+					Id: pendiente.TramId, TramNumero: pendiente.TramNumero, NombreEmisor: __valorDoc,
                    TramFecha: pendiente.TramFecha, TramAsunto: pendiente.TramAsunto, TrMoId: pendiente.TrMoId,
                    TrMoFecha: pendiente.TrMoFecha, TiTrId: pendiente.TiTrId, TiTrAbrevia: pendiente.TiTrAbrevia, TramArchivo: pendiente.TramArchivo
 				}
@@ -118,16 +118,16 @@ export class BandejaComponent {
     }
 	mostrarGrillaMovimiento() {
 		this.pendientesPresentar2=[];
-		let _valorDoc:string="";
+		let __valorDoc:string="";
 		for(let pendiente of this.tramitesPendiente ){
 			if (pendiente.TramCodEmisor!=null)
-				_valorDoc=pendiente.nombrecom;
+				__valorDoc=pendiente.nombrecom;
 			else
-				_valorDoc=pendiente.EnExNombre;
+				__valorDoc=pendiente.EnExNombre;
 			this.pendientesPresentar2.push(
 				{
 					   nombreUsu: pendiente.nombreUsu, TiTrAbrevia: pendiente.TiTrAbrevia, 
-					   TrMoFecha: pendiente.TrMoFecha, Persona: _valorDoc, TrMoObserva: pendiente.TrMoObserva, 
+					   TrMoFecha: pendiente.TrMoFecha, Persona: __valorDoc, TrMoObserva: pendiente.TrMoObserva, 
 					   TrMoId: pendiente.TrMoId
 				}
 			);
@@ -136,7 +136,11 @@ export class BandejaComponent {
 		 this.rowData2=this.pendientesPresentar2;
 
 	}
+	CargarBandeja(_valor:number){
+		this.recibido=_valor;
+		this.getAllPendiente(this.idCap,this.idUsuario,this.recibido.toString(),this.supervisor);
 
+	}
 	private bandejas = [
 		{ value: 0, display: 'Pendiente' },
 		{ value: 1, display: 'Recibido' }

@@ -8,7 +8,7 @@
             <div class="col-lg-5">
                 <input placeholder="Buscar..." type="text"  id="quickFilterInput" />
                 <span *ngFor="let bande of bandejas">
-                    <label><input type="radio" name="bande" [value]="bande.value" [(ngModel)]="bandeja" checked/> {{bande.display}}</label>                    
+                    <label><input type="radio" name="bande" [value]="bande.value" [(ngModel)]="bandeja" checked (change)="cargarBandeja(bande.value)"/> {{bande.display}}</label>                    
                     
                 </span>
             </div>
