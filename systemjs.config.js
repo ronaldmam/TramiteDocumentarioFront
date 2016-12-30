@@ -20,12 +20,15 @@
       '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
       '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
       '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
-      '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
+      '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',      
       // other libraries
       'rxjs':                       'npm:rxjs',
       'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
       'ag-grid-ng2':                'node_modules/ag-grid-ng2',
-      'ag-grid':                    'node_modules/ag-grid'
+      'ag-grid':                    'node_modules/ag-grid',
+      'bootstrap':                  'npm:bootstrap/dist/js/bootstrap.min.js',
+      //'jquery':                     'npm:jquery/dist/jquery.js',
+      //'@ng-bootstrap/ng-bootstrap': 'node_modules/@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

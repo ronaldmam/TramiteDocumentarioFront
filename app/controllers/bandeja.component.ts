@@ -74,15 +74,15 @@ export class BandejaComponent {
 	}
 	mostrarGrillaPendiente() {
 		this.pendientesPresentar=[];
-		let __valorDoc:string="";
+		let _valorDoc:string="";
 		for(let pendiente of this.tramitesPendiente ){
 			if (pendiente.TramCodEmisor!=null)
-				__valorDoc=pendiente.nombrecom;
+				_valorDoc=pendiente.nombrecom;
 			else
-				__valorDoc=pendiente.EnExNombre;
+				_valorDoc=pendiente.EnExNombre;
 			this.pendientesPresentar.push(
 				{
-					Id: pendiente.TramId, TramNumero: pendiente.TramNumero, NombreEmisor: __valorDoc,
+					Id: pendiente.TramId, TramNumero: pendiente.TramNumero, NombreEmisor: _valorDoc,
                    TramFecha: pendiente.TramFecha, TramAsunto: pendiente.TramAsunto, TrMoId: pendiente.TrMoId,
                    TrMoFecha: pendiente.TrMoFecha, TiTrId: pendiente.TiTrId, TiTrAbrevia: pendiente.TiTrAbrevia, TramArchivo: pendiente.TramArchivo
 				}
@@ -118,16 +118,16 @@ export class BandejaComponent {
     }
 	mostrarGrillaMovimiento() {
 		this.pendientesPresentar2=[];
-		let __valorDoc:string="";
+		let _valorDoc:string="";
 		for(let pendiente of this.tramitesPendiente ){
 			if (pendiente.TramCodEmisor!=null)
-				__valorDoc=pendiente.nombrecom;
+				_valorDoc=pendiente.nombrecom;
 			else
-				__valorDoc=pendiente.EnExNombre;
+				_valorDoc=pendiente.EnExNombre;
 			this.pendientesPresentar2.push(
 				{
 					   nombreUsu: pendiente.nombreUsu, TiTrAbrevia: pendiente.TiTrAbrevia, 
-					   TrMoFecha: pendiente.TrMoFecha, Persona: __valorDoc, TrMoObserva: pendiente.TrMoObserva, 
+					   TrMoFecha: pendiente.TrMoFecha, Persona: _valorDoc, TrMoObserva: pendiente.TrMoObserva, 
 					   TrMoId: pendiente.TrMoId
 				}
 			);
@@ -136,8 +136,8 @@ export class BandejaComponent {
 		 this.rowData2=this.pendientesPresentar2;
 
 	}
-	CargarBandeja(_valor:number){
-		this.recibido=_valor;
+	cargarBandeja(_valorRadio:number){
+		this.recibido=_valorRadio;
 		this.getAllPendiente(this.idCap,this.idUsuario,this.recibido.toString(),this.supervisor);
 
 	}

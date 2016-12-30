@@ -59,15 +59,15 @@ var BandejaComponent = (function () {
     };
     BandejaComponent.prototype.mostrarGrillaPendiente = function () {
         this.pendientesPresentar = [];
-        var __valorDoc = "";
+        var _valorDoc = "";
         for (var _i = 0, _a = this.tramitesPendiente; _i < _a.length; _i++) {
             var pendiente = _a[_i];
             if (pendiente.TramCodEmisor != null)
-                __valorDoc = pendiente.nombrecom;
+                _valorDoc = pendiente.nombrecom;
             else
-                __valorDoc = pendiente.EnExNombre;
+                _valorDoc = pendiente.EnExNombre;
             this.pendientesPresentar.push({
-                Id: pendiente.TramId, TramNumero: pendiente.TramNumero, NombreEmisor: __valorDoc,
+                Id: pendiente.TramId, TramNumero: pendiente.TramNumero, NombreEmisor: _valorDoc,
                 TramFecha: pendiente.TramFecha, TramAsunto: pendiente.TramAsunto, TrMoId: pendiente.TrMoId,
                 TrMoFecha: pendiente.TrMoFecha, TiTrId: pendiente.TiTrId, TiTrAbrevia: pendiente.TiTrAbrevia, TramArchivo: pendiente.TramArchivo
             });
@@ -92,23 +92,23 @@ var BandejaComponent = (function () {
     };
     BandejaComponent.prototype.mostrarGrillaMovimiento = function () {
         this.pendientesPresentar2 = [];
-        var __valorDoc = "";
+        var _valorDoc = "";
         for (var _i = 0, _a = this.tramitesPendiente; _i < _a.length; _i++) {
             var pendiente = _a[_i];
             if (pendiente.TramCodEmisor != null)
-                __valorDoc = pendiente.nombrecom;
+                _valorDoc = pendiente.nombrecom;
             else
-                __valorDoc = pendiente.EnExNombre;
+                _valorDoc = pendiente.EnExNombre;
             this.pendientesPresentar2.push({
                 nombreUsu: pendiente.nombreUsu, TiTrAbrevia: pendiente.TiTrAbrevia,
-                TrMoFecha: pendiente.TrMoFecha, Persona: __valorDoc, TrMoObserva: pendiente.TrMoObserva,
+                TrMoFecha: pendiente.TrMoFecha, Persona: _valorDoc, TrMoObserva: pendiente.TrMoObserva,
                 TrMoId: pendiente.TrMoId
             });
         }
         this.rowData2 = this.pendientesPresentar2;
     };
-    BandejaComponent.prototype.CargarBandeja = function (_valor) {
-        this.recibido = _valor;
+    BandejaComponent.prototype.cargarBandeja = function (_valorRadio) {
+        this.recibido = _valorRadio;
         this.getAllPendiente(this.idCap, this.idUsuario, this.recibido.toString(), this.supervisor);
     };
     BandejaComponent = __decorate([
