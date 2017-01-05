@@ -5,6 +5,7 @@ import { HeroesComponent }      from './heroes.component';
 import { DashboardComponent }   from './dashboard.component';
 import { HeroDetailComponent }   from './hero-detail.component';
 import { BandejaComponent }   from './controllers/bandeja.component';
+import { EnvioComponent }   from './controllers/envio.component';
 
 const appRoutes: Routes = [
   	{
@@ -18,6 +19,10 @@ const appRoutes: Routes = [
 	{
    		path: 'bandeja',
   		component: BandejaComponent
+	},
+	{
+   		path: 'envio',
+  		component: EnvioComponent
 	},
 	/*{
   		path: '',

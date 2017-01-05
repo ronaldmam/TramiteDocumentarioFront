@@ -64,7 +64,7 @@ export class BandejaComponent {
 
 	ngOnInit(){
 		this.idCap='4004';
-		this.idUsuario='04742754';
+		this.idUsuario='00424113'; // parihuana Jose Luis '04742754' 
 		this.supervisor=1;
 		this.bandeja=this.bandejas[0].value
 		this.recibido=this.bandeja;

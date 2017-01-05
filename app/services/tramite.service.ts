@@ -7,8 +7,10 @@ import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class TramiteService {
-	private baseUrl: string = 'http://localhost:8081/TramiteDocumentarioJava/rest/tramites/';
-  private baseUrl2: string = 'http://localhost:8081/TramiteDocumentarioJava/rest/tramitesmovi/';
+	//private baseUrl: string = 'http://localhost:8081/TramiteDocumentarioJava/rest/tramites/';
+  private baseUrl: string = 'http://tramite-ronaldmam.rhcloud.com/rest/tramites/';
+  //private baseUrl2: string = 'http://localhost:8081/TramiteDocumentarioJava/rest/tramitesmovi/';
+  private baseUrl2: string = 'http://tramite-ronaldmam.rhcloud.com/rest/tramitesmovi/';
   private tramitesPendiente:string[];
   constructor(private http: Http) { }
 	getAllPendiente(codcap: string, id_usuario:string, recibido:string,superv:number) {

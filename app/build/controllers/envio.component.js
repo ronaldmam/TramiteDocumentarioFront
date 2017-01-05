@@ -9,19 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
-        this.title = 'Tour of Heroes';
+var EnvioComponent = (function () {
+    function EnvioComponent() {
     }
-    return AppComponent;
+    return EnvioComponent;
 }());
-AppComponent = __decorate([
+EnvioComponent = __decorate([
     core_1.Component({
-        selector: 'my-app',
-        styleUrls: ['app/app.component.css'],
-        template: "\n    <h1>{{title}}</h1>\n   <nav>\n     <a routerLink=\"/dashboard\" routerLinkActive=\"active\">Dashboard</a>\n     <a routerLink=\"/heroes\" routerLinkActive=\"active\">Heroes</a>\n      <a routerLink=\"/bandeja\" routerLinkActive=\"active\">Bandeja</a>\n       <a routerLink=\"/envio\" routerLinkActive=\"active\">Envio</a>\n   </nav>\n   <router-outlet></router-outlet>\n  "
+        selector: 'envio',
+        templateUrl: 'app/views/envio.component.html'
     }),
     __metadata("design:paramtypes", [])
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+], EnvioComponent);
+exports.EnvioComponent = EnvioComponent;
+//# sourceMappingURL=envio.component.js.map

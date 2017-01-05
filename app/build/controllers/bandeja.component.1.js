@@ -121,4 +121,4 @@ BandejaComponent = __decorate([
     __metadata("design:paramtypes", [tramite_service_1.TramiteService])
 ], BandejaComponent);
 exports.BandejaComponent = BandejaComponent;
-//# sourceMappingURL=bandeja.component.js.map
+//# sourceMappingURL=bandeja.component.1.js.map
