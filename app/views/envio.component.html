@@ -1,62 +1,26 @@
-<div >
-    <div class="panel panel-info" >
-        <div class="panel-heading sinpadding">  Bandeja de Entrada   </div>
-        <div class="panel-body sinpadding">
-            <div id="loader" style="display: none">
-                <i class="fa-spinner fa-spin fa-2x"> </i> Getting values
-            </div>
-            <div class="col-lg-5">
-                <input placeholder="Buscar..." type="text"  id="quickFilterInput" />
-                <span *ngFor="let bande of bandejas">
-                    <label><input type="radio" name="bande" [value]="bande.value" [(ngModel)]="bandeja" checked (change)="cargarBandeja(bande.value)"/> {{bande.display}}</label>                    
-                    
-                </span>
-            </div>
-      <!--<div class="col-lg-7" style="text-align:right">
-                <button ng-click="RecepcionarTramite()"  ng-hide="recibido"
-                        class="btn btn-succes" ng-disabled="btnRecibir">
-                    <i class="glyphicon glyphicon-plus"></i> Recibir
-                </button>
-                <button ng-click="DerivarTramiteMov()"
-                        class="btn btn-succes">
-                    <i class="glyphicon glyphicon-plus"></i> Derivar
-                </button>
-                <button ng-click="ArchivarTramiteMov()"
-                        class="btn btn-succes">
-                    <i class="glyphicon glyphicon-plus"></i> Archivar
-                </button>
-            </div>-->
-                      
-            <ag-grid-ng2 #agGrid style="height:250px" class="ag-blue col-lg-12"
-                [gridOptions]="gridOptions"
-                [columnDefs]="columnDefs"               
-                [rowData]="rowData"
-                enableSorting
-                enableFilter 
-                rowSelection="single"
-                (rowSelected)="onRowSelected($event)"              
-                >
+<div class="card">
+    <div class="card-header">
+       <div id="loader" style="display: none">
+                    <i class="fa-spinner fa-spin fa-2x"> </i> Getting values
+       </div>
+       
+           <span >Pendientes de Envio</span>
 
-            </ag-grid-ng2>
-          </div>
+       
     </div>
-    <div class="panel panel-info" > <!-- ng-controller="ng-AngularController" ng-init="cargar()"-->
-        <div class="panel-heading">  Movimientos de Tramite   </div>
-        <div class="panel-body">
-           <!-- <input placeholder="Buscar..." type="text" ng-model="gridOptions.quickFilterText" />-->
+    <div class="card-block">
+       <div class="card-title ">
+           <div class="text-xs-right">
+              <button ng-click="addTramite()"
+                   class="btn btn-succes">
+                  <i class="glyphicon glyphicon-plus"></i> Nuevo Tramite
+              </button>
+           </div>
+       </div>
+       <div class="card-text">
 
-           <!-- <div ag-grid="gridOptions2" style="height:250px" class="ag-blue"></div>-->
-           <ag-grid-ng2 #agGrid style="height:250px" class="ag-blue col-lg-12"
-                [gridOptions]="gridOptions2"
-                [columnDefs]="columnDefs2"               
-                [rowData]="rowData2"
-                enableSorting
-                enableFilter 
-                rowSelection="single"
-                              
-                >
-            </ag-grid-ng2>
-        </div>
-   
+       </div>
     </div>
 </div>
+
+

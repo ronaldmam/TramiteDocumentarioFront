@@ -26,7 +26,7 @@
       'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
       'ag-grid-ng2':                'node_modules/ag-grid-ng2',
       'ag-grid':                    'node_modules/ag-grid',
-      'bootstrap':                  'npm:bootstrap/dist/js/bootstrap.min.js',
+      //'bootstrap':                  'node_modules/bootstrap/dist/js/bootstrap.min.js',
       //'jquery':                     'npm:jquery/dist/jquery.js',
       //'@ng-bootstrap/ng-bootstrap': 'node_modules/@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js'
     },

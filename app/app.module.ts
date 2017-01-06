@@ -11,12 +11,13 @@ import { HeroesComponent } from './heroes.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { DashboardComponent }   from './dashboard.component';
 import { BandejaComponent } from './controllers/bandeja.component';
+import { EnvioComponent } from './controllers/envio.component';
 import { HeroService } from './hero.service';
 import { TramiteService } from './services/tramite.service';
 
 @NgModule({
   imports:      [ BrowserModule ,  FormsModule, HttpModule, routing,AgGridModule.withNg2ComponentSupport(),],//NgbModule.forRoot()
-  declarations: [ AppComponent,HeroesComponent, HeroDetailComponent, DashboardComponent,BandejaComponent ],
+  declarations: [ AppComponent,HeroesComponent, HeroDetailComponent, DashboardComponent,BandejaComponent,EnvioComponent ],
   providers: [  HeroService, TramiteService  ],
   bootstrap:    [ AppComponent ]
 })

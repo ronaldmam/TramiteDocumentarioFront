@@ -1,11 +1,11 @@
 <div >
-    <div class="panel panel-info" >
-        <div class="panel-heading sinpadding">  Bandeja de Entrada   </div>
-        <div class="panel-body sinpadding">
+    <div class="card" >
+        <div class="card-header">  Bandeja de Entrada   </div>
+        <div class="card-block" style="padding:3">
             <div id="loader" style="display: none">
                 <i class="fa-spinner fa-spin fa-2x"> </i> Getting values
             </div>
-            <div class="col-lg-5">
+            <div class="card-title">
                 <input placeholder="Buscar..." type="text"  id="quickFilterInput" />
                 <span *ngFor="let bande of bandejas">
                     <label><input type="radio" name="bande" [value]="bande.value" [(ngModel)]="bandeja" checked (change)="cargarBandeja(bande.value)"/> {{bande.display}}</label>                    
@@ -26,27 +26,29 @@
                     <i class="glyphicon glyphicon-plus"></i> Archivar
                 </button>
             </div>-->
-                      
-            <ag-grid-ng2 #agGrid style="height:250px" class="ag-blue col-lg-12"
-                [gridOptions]="gridOptions"
-                [columnDefs]="columnDefs"               
-                [rowData]="rowData"
-                enableSorting
-                enableFilter 
-                rowSelection="single"
-                (rowSelected)="onRowSelected($event)"              
-                >
+            <div class="card-text">          
+                <ag-grid-ng2 #agGrid style="height:250px;width: 100%" class="ag-blue "
+                    [gridOptions]="gridOptions"
+                    [columnDefs]="columnDefs"               
+                    [rowData]="rowData"
+                    enableSorting
+                    enableFilter 
+                    rowSelection="single"
+                    (rowSelected)="onRowSelected($event)"              
+                    >
 
-            </ag-grid-ng2>
+                </ag-grid-ng2>
+            </div>
           </div>
     </div>
-    <div class="panel panel-info" > <!-- ng-controller="ng-AngularController" ng-init="cargar()"-->
-        <div class="panel-heading">  Movimientos de Tramite   </div>
-        <div class="panel-body">
+    <div class="card" > <!-- ng-controller="ng-AngularController" ng-init="cargar()"-->
+        <div class="card-header">  Movimientos de Tramite   </div>
+        <div class="card-block" style="padding:3">
            <!-- <input placeholder="Buscar..." type="text" ng-model="gridOptions.quickFilterText" />-->
 
            <!-- <div ag-grid="gridOptions2" style="height:250px" class="ag-blue"></div>-->
-           <ag-grid-ng2 #agGrid style="height:250px" class="ag-blue col-lg-12"
+         <div class="card-text">  
+           <ag-grid-ng2 #agGrid style="height:250px;width: 100%" class="ag-blue"
                 [gridOptions]="gridOptions2"
                 [columnDefs]="columnDefs2"               
                 [rowData]="rowData2"
@@ -56,6 +58,7 @@
                               
                 >
             </ag-grid-ng2>
+         </div>  
         </div>
    
     </div>
