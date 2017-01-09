@@ -21,6 +21,12 @@ var TramiteService = (function () {
         //private baseUrl2: string = 'http://localhost:8081/TramiteDocumentarioJava/rest/tramitesmovi/';
         this.baseUrl2 = 'http://tramite-ronaldmam.rhcloud.com/rest/tramitesmovi/';
     }
+    TramiteService.prototype.getAllEmitidos = function (codcap) {
+        return this.http
+            .get(this.baseUrl + "getalltramitesenv/" + codcap)
+            .map(function (r) { return r.json(); })
+            .catch(this.handleError);
+    };
     TramiteService.prototype.getAllPendiente = function (codcap, id_usuario, recibido, superv) {
         return this.http
             .get(this.baseUrl2 + 'getalltramitemovbyrecibir?codcap=' + codcap + "&id_usuario=" + id_usuario + "&recibido=" + recibido + "&superv=" + superv) //${codcap}&id_usuario=${id_usuario}&recibido=${recibido}&superv=${superv}'

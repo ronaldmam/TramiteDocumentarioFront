@@ -1,24 +1,31 @@
 <div class="card">
     <div class="card-header">
        <div id="loader" style="display: none">
-                    <i class="fa-spinner fa-spin fa-2x"> </i> Getting values
+            <i class="fa-spinner fa-spin fa-2x"> </i> Getting values
        </div>
-       
-           <span >Pendientes de Envio</span>
-
-       
+            <span >Pendientes de Envio</span>       
     </div>
-    <div class="card-block">
+    <div class="card-block" style="padding:3">
        <div class="card-title ">
-           <div class="text-xs-right">
-              <button ng-click="addTramite()"
-                   class="btn btn-succes">
+           <input placeholder="Buscar..." type="text"  id="quickFilterInput" />
+           <span class="text-xs-right" >
+              <button (click)="addTramite()"
+                   class="btn btn-succes" >
                   <i class="glyphicon glyphicon-plus"></i> Nuevo Tramite
               </button>
-           </div>
+           </span>
        </div>
        <div class="card-text">
-
+              <ag-grid-ng2 #agGrid style="height:250px;width: 100%" class="ag-blue "
+                    [gridOptions]="gridOptions"
+                    [columnDefs]="columnDefs"               
+                    [rowData]="rowData"
+                    enableSorting
+                    enableFilter 
+                    rowSelection="single"
+                    (rowSelected)="onRowSelected($event)"              
+                    >
+                </ag-grid-ng2>
        </div>
     </div>
 </div>

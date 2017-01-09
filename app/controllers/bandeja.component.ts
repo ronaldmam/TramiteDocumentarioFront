@@ -95,9 +95,7 @@ export class BandejaComponent {
         this.gridOptions = {
 	        //enableSorting: true,
 	        //rowData: this.rowData,
-	        //columnDefs: this.columnDefs,
-			
-	       
+	        //columnDefs: this.columnDefs,				       
 		}
 	}
 	private onRowSelected($event) {

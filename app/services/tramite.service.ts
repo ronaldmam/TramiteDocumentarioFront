@@ -13,6 +13,13 @@ export class TramiteService {
   private baseUrl2: string = 'http://tramite-ronaldmam.rhcloud.com/rest/tramitesmovi/';
   private tramitesPendiente:string[];
   constructor(private http: Http) { }
+ 
+ getAllEmitidos(codcap: string) {
+  	return this.http
+             .get(this.baseUrl+ "getalltramitesenv/"+codcap) 
+             .map((r: Response) => r.json() )             
+             .catch(this.handleError);
+  }
 	getAllPendiente(codcap: string, id_usuario:string, recibido:string,superv:number) {
   	return this.http
              .get(this.baseUrl2+ 'getalltramitemovbyrecibir?codcap='+codcap + "&id_usuario=" + id_usuario + "&recibido=" + recibido + "&superv=" + superv) //${codcap}&id_usuario=${id_usuario}&recibido=${recibido}&superv=${superv}'
