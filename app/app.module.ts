@@ -6,6 +6,7 @@ import { HttpModule }    from '@angular/http';
 import {AgGridModule} from 'ag-grid-ng2/main';
 //import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DataTableModule,SharedModule} from 'primeng/primeng';
+import {ButtonModule,DialogModule} from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes.component';
@@ -17,7 +18,7 @@ import { HeroService } from './hero.service';
 import { TramiteService } from './services/tramite.service';
 
 @NgModule({
-  imports:      [ BrowserModule ,  FormsModule, HttpModule, routing,AgGridModule.withNg2ComponentSupport(),DataTableModule,SharedModule],//NgbModule.forRoot()
+  imports:      [ BrowserModule ,  FormsModule, HttpModule, routing,AgGridModule.withNg2ComponentSupport(),DataTableModule,SharedModule, ButtonModule,DialogModule],//NgbModule.forRoot()
   declarations: [ AppComponent,HeroesComponent, HeroDetailComponent, DashboardComponent,BandejaComponent,EnvioComponent ],
   providers: [  HeroService, TramiteService  ],
   bootstrap:    [ AppComponent ]

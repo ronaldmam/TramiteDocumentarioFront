@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DataTableModule,SharedModule} from 'primeng/primeng';
-
+import {ButtonModule,DialogModule} from 'primeng/primeng';
 import { TramiteService } from '../services/tramite.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class EnvioComponent {
   private isLoading: boolean = true;  
   private errorMessage:string='';
   //propieadades de la ng-grid
-	
+  displayDialog: boolean;
   private columnDefs:any[];
 
   constructor(private _tramiteService: TramiteService){
