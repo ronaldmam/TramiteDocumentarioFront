@@ -37,7 +37,6 @@
        </div>
     </div>
 </div>
-<!--Formulario modal de ingreso de wl envio de tramite-->
 <p-dialog header="Car Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
     <form name="form">
         <div class="modal-header">
@@ -50,10 +49,8 @@
             </button>
             <h4 class="modal-title">{{headerTitle}}</h4>
         </div>
-        <div class="modal-body">
-            <div class="form-horizontal">
-                <div>
-                    <div class="form-group">
+        <div class="form-horizontal">
+           <div class="form-group">
                         <label for="lblFecha" class="col-lg-2 control-label">Fecha</label>
                         <div class="col-lg-3">
                             <input type="date"
@@ -78,142 +75,8 @@
                                    ng-model="tramite.TramNumero"
                                    ng-required="true" placeholder="Numero Documento ">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="lblRemitente" class="col-lg-2 control-label">Remitente</label>
-                        <div class="col-lg-8">
-                            <select ng-model="tramite.TramCodEmisor"
-                                    ng-options="value.id_persona as value.nombrecom for value in personales" class="form-control" ng-required="true">
-                                <option>--</option>
-                            </select>
-
-                        </div>
-                        <div class="col-lg-2">
-                            Id: {{tramite.TramCodEmisor}}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="lblAsunto" class="col-lg-2 control-label">Asunto</label>
-                        <div class="col-lg-10">
-                            <input type="text"
-                                   class="form-control"
-                                   ng-model="tramite.TramAsunto"
-                                   ng-required="true">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="lnlReferencia" class="col-lg-2 control-label">Referencia</label>
-                        <div class="col-lg-10">
-                            <input type="text"
-                                   class="form-control"
-                                   ng-model="tramite.TramDocRefere"
-                                   >
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail" class="col-lg-2 control-label">Observaciones</label>
-                        <div class="col-lg-10">
-                            <input type="text"
-                                   class="form-control"
-                                   ng-model="tramite.TramObserva"
-                                   >
-                        </div>
-                    </div>
-                </div>
-                <div ng-show="mostrarCtrlEnvio" >
-                    <div class="form-group" >
-                        
-                        <label for="lblAdjunto" class="col-lg-2 control-label">Destinatario Interno</label>
-                        <div class="col-lg-2">
-                            <label>
-                                <input type="radio" ng-model="personal.interno" value="true">
-                                Interno
-                            </label>
-                            <label>
-                                <input type="radio" ng-model="personal.interno" value="false">
-                                Externo
-                            </label>
-                        </div>
-                        <div  class="col-lg-2">
-                            <label>
-                                <input type="radio" ng-model="personal.copia" value="false">
-                                Original
-                            </label>
-                            <label>
-                            <input type="radio" ng-model="personal.copia" value="true">
-                                Copia
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="lblObserva" class="col-lg-1 control-label">Observa</label>
-                            <div class="col-lg-4">
-                                <input type="text"
-                                       class="form-control"
-                                       ng-model="personal.observa"
-                                      >
-                            </div>
-                            <button class=" btn btn-info btn-sm glyphicon glyphicon-plus-sign" ng-click="buscarInterno()">
-                             
-                            </button>
-                        </div>
-                       
-                    </div>
-                    <div class="col-lg-1"></div>
-                    <div class="form-group col-lg-11">
-                        <table tr-ng-grid='' items='destinatariosPresentar' selected-items="mySelectedItems"
-                               selection-mode="none" >
-
-                            <thead>
-
-                                <tr>
-                                    <th field-name="Id" display-name="Id" enable-filtering="false" enable-sorting="False" cell-width="1em" display-align="left">
-                                    <th field-name="documento" display-name="DOC" enable-filtering="false" enable-sorting="False" cell-width="8em" display-align="left">
-                                    <th field-name="nombre" display-name="Nombre" enable-filtering="false" enable-sorting="False" cell-width="20em" display-align="left">
-                                    <th field-name="lugar" display-name="Lugar" enable-filtering="false" enable-sorting="False" cell-width="12em" display-align="left">
-                                    <th field-name="ambito" display-name="Ambito" enable-filtering="false" enable-sorting="False" cell-width="4em" display-align="left">
-                                    <th field-name="tipo" display-name="Tipo" enable-filtering="false" enable-sorting="False" cell-width="4em" display-align="left">
-
-                                    <th>
-                                        <div class="tr-ng-title" cell-width="2em">
-                                            Accion
-                                        </div>
-                                    </th>
-                              </tr>
-
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <button class="btn btn-default glyphicon glyphicon-remove-circle" ng-click="deleteDestinatario($event, gridDisplayItem.Id)">
-                                          <!--  {gridDisplayItem.Id }} {Id}}    {gridDisplayItem.Id  } mySelectedItems[0].Id-->
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td>
-                                      <!--  <div class="col-sm-10"> <span tr-ng-grid-global-filter=""></span>       </div>-->
-                                        --
-                                       <div class="col-sm-10"><span tr-ng-grid-pager=""></span></div>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>    
-                     </div>
-                    <div class="form-group ">
-                        <label class="col-lg-5" >
-                            <input type="file" name="file" 
-                                   uploader-model="file" accept=".pdf" /><br />
-                        </label> 
-                        <label >
-                            <input type="button" ng-click="uploadFile()" value="Cargar" />
-                        </label><br />
-                        <label><input type="text" ng-model="tramite.TramArchivo" disabled /></label>
-                    </div>
-                </div>
-            </div>
-        </div>
+             </div>
+        </div>       
 
          <footer>
             <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
@@ -223,10 +86,5 @@
                 
             </div>
         </footer>
-       
-        
-
-        
     </form>
  </p-dialog>
-

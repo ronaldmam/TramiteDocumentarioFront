@@ -13,8 +13,9 @@ export class EnvioComponent {
   private enviosPresentar:any = [];
   private isLoading: boolean = true;  
   private errorMessage:string='';
+  //propiedades de modal
+  private displayDialog: boolean=true;
   //propieadades de la ng-grid
-  displayDialog: boolean;
   private columnDefs:any[];
 
   constructor(private _tramiteService: TramiteService){
