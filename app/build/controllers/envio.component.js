@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var tramite_service_1 = require('../services/tramite.service');
+var core_1 = require("@angular/core");
+var tramite_service_1 = require("../services/tramite.service");
 var EnvioComponent = (function () {
     function EnvioComponent(_tramiteService) {
         /*  this.columnDefs = [
@@ -58,14 +58,14 @@ var EnvioComponent = (function () {
             });
         }
     };
-    EnvioComponent = __decorate([
-        core_1.Component({
-            selector: 'envio',
-            templateUrl: 'app/views/envio.component.html'
-        }), 
-        __metadata('design:paramtypes', [tramite_service_1.TramiteService])
-    ], EnvioComponent);
     return EnvioComponent;
 }());
+EnvioComponent = __decorate([
+    core_1.Component({
+        selector: 'envio',
+        templateUrl: 'app/views/envio.component.html'
+    }),
+    __metadata("design:paramtypes", [tramite_service_1.TramiteService])
+], EnvioComponent);
 exports.EnvioComponent = EnvioComponent;
 //# sourceMappingURL=envio.component.js.map

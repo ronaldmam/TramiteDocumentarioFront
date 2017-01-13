@@ -5,7 +5,7 @@
 		</div>
 		<span >Pendientes de Envio</span>
 	</div>
-    <div class="card-block" style="padding:3">
+	<div class="card-block" style="padding:3">
 		<div class="card-title ">
 			<input placeholder="Buscar..." type="text"  id="gb1" #filtroGlobal />
 			<span class="text-xs-right" >
@@ -35,11 +35,11 @@
 				<p-column field="TiDocAbrevia" header="TiDocAbrevia" [sortable]="true"></p-column>
 			</p-dataTable>
 		</div>
-    </div>
+	</div>
 </div>
-<p-dialog header="Car Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [resizable]="false"  >
+<p-dialog header="Car Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" contentHeight="400"  >
 	<form name="form">
-		<div>
+		<div >
 			<div class="form-group row ">
 				<div class="form-group ">
 					<label for="lblFecha" class="col-lg-2 col-form-label col-form-label-sm">Fecha</label>
@@ -142,7 +142,25 @@
 				
 			</div>
 		</div>
-
+		<!--<div  class="col-sm-1"></div>-->
+	<!--	<div class="col-sm-12" >
+			<p-dataTable [value]="enviosPresentar"  scrollable="true"  
+			selectionMode="single">				
+				<p-column styleClass="col-button" [style]="{'width':'4em'}">
+					<template pTemplate="header">
+						<button type="button" pButton icon="fa-refresh"></button>
+					</template>
+					<template let-car="rowData" pTemplate="body" >						
+						<button type="button" pButton (click)="deleteCar(car)" icon="fa-trash" class="btn"></button>
+					</template>
+				</p-column>
+				<p-column field="TramNumero" header="TramNumero" [sortable]="true" [style]="{'width':'5.5em'}"></p-column>
+				<p-column field="NombreEmisor" header="NombreEmisor" [sortable]="true" [style]="{'width':'8em'}"></p-column>
+				<p-column field="TramFecha" header="TramFecha" [sortable]="true" [style]="{'width':'5em'}"></p-column>
+				<p-column field="TramAsunto" header="TramAsunto" [sortable]="true" [style]="{'width':'10em'}"></p-column>
+				<p-column field="TiDocAbrevia" header="TiDocAbrevia" [sortable]="true" [style]="{'width':'4em'}"></p-column>
+			</p-dataTable>
+		</div>-->
 		<footer>
 			<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 				<button type="button" pButton icon="fa-close" (click)="enviarTramite()" label="Enviar" *ngIf="muestraEnviar"></button>
@@ -151,5 +169,5 @@
 				
 			</div>
 		</footer>
-    </form>
+	</form>
  </p-dialog>

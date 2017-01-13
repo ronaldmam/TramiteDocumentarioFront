@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+
+// es para el datatable
 import {DataTableModule,SharedModule} from 'primeng/primeng';
 import {ButtonModule,DialogModule} from 'primeng/primeng';
 import { TramiteService } from '../services/tramite.service';
+
 
 @Component({
   selector: 'envio', 
@@ -18,7 +21,8 @@ export class EnvioComponent {
   //propieadades de la ng-grid
   private columnDefs:any[];
 
-  constructor(private _tramiteService: TramiteService){
+
+  constructor(private _tramiteService: TramiteService){ 
   /*  this.columnDefs = [
             { header: "TramNumero", field: "TramNumero"},
 			{ header: "NombreEmisor", field: "NombreEmisor", sortable:"true"},
@@ -28,7 +32,7 @@ export class EnvioComponent {
         ];*/
 
   }
-  getAllEmitidos(codcap: string) {
+	getAllEmitidos(codcap: string) {
 		this._tramiteService.getAllEmitidos(codcap)
 			.subscribe(
 			data => { this.tramitesEnvio = data;			 
@@ -38,7 +42,7 @@ export class EnvioComponent {
 			);
 
 	}
-  ngOnInit(){
+ 	ngOnInit(){
 		this.codCap='4004';	
 		this.getAllEmitidos(this.codCap);
 		//this.mostrarGrillaEnvio() ;
@@ -62,5 +66,5 @@ export class EnvioComponent {
 
 		}     
 	}
-	
+
 }

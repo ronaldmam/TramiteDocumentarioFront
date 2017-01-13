@@ -28,7 +28,7 @@
       'ag-grid':                    'node_modules/ag-grid',
       //'bootstrap':                  'node_modules/bootstrap/dist/js/bootstrap.min.js',
       //'jquery':                     'npm:jquery/dist/jquery.js',
-      //'@ng-bootstrap/ng-bootstrap': 'node_modules/@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js'
+      //'@ng-bootstrap/ng-bootstrap': 'node_modules/@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
       'primeng':                   'npm:primeng' 
     },
     // packages tells the System loader how to load when no filename and/or no extension

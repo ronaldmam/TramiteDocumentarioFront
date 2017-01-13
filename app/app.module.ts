@@ -4,7 +4,8 @@ import { FormsModule }   from '@angular/forms';
 import { routing } from './app.routing';
 import { HttpModule }    from '@angular/http';
 import {AgGridModule} from 'ag-grid-ng2/main';
-//import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+//Esto lo uso para la grilla
 import {DataTableModule,SharedModule} from 'primeng/primeng';
 import {ButtonModule,DialogModule} from 'primeng/primeng';
 
@@ -18,10 +19,10 @@ import { HeroService } from './hero.service';
 import { TramiteService } from './services/tramite.service';
 
 @NgModule({
-  imports:      [ BrowserModule ,  FormsModule, HttpModule, routing,AgGridModule.withNg2ComponentSupport(),DataTableModule,SharedModule, ButtonModule,DialogModule],//NgbModule.forRoot()
+  imports:      [ BrowserModule ,  FormsModule, HttpModule, routing,AgGridModule.withNg2ComponentSupport(),DataTableModule,SharedModule, ButtonModule,DialogModule],
   declarations: [ AppComponent,HeroesComponent, HeroDetailComponent, DashboardComponent,BandejaComponent,EnvioComponent ],
   providers: [  HeroService, TramiteService  ],
-  bootstrap:    [ AppComponent ]
+  bootstrap:    [ AppComponent]
 })
 export class AppModule { 
 
