@@ -1,90 +1,155 @@
 <div class="card">
-    <div class="card-header">
-       <div id="loader" style="display: none">
-            <i class="fa-spinner fa-spin fa-2x"> </i> Getting values
-       </div>
-            <span >Pendientes de Envio</span>       
-    </div>
+	<div class="card-header">
+		<div id="loader" style="display: none">
+			<i class="fa-spinner fa-spin fa-2x"> </i> Getting values
+		</div>
+		<span >Pendientes de Envio</span>
+	</div>
     <div class="card-block" style="padding:3">
-       <div class="card-title ">
-           <input placeholder="Buscar..." type="text"  id="gb1" #filtroGlobal />
-           <span class="text-xs-right" >
-              <button (click)="addTramite()" pButton icon="fa-file-text-o" label="Nuevo"
-                   class="btn btn-succes" >                   
-              </button>
-           </span>
-       </div>
-       <div class="card-text">
-            <p-dataTable [value]="enviosPresentar" [rows]="10" [paginator]="true"  
-            [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="filtroGlobal" scrollable="true"  scrollWidth="100%"
-            selectionMode="single" >
-                <!--<p-column *ngFor="let col of columnDefs" [field]="col.field" [header]="col.header"></p-column>-->
-                <p-column styleClass="col-button" [style]="{'width':'6em'}">
-                    <template pTemplate="header">
-                        <button type="button" pButton icon="fa-refresh"></button>
-                    </template>
-                    <template let-car="rowData" pTemplate="body" >
-                        <button type="button" pButton (click)="selectCar(car)" icon="fa-pencil-square-o" class="btn"></button>
-                        <button type="button" pButton (click)="deleteCar(car)" icon="fa-trash" class="btn"></button>
-                    </template>
-                </p-column>
-                <p-column field="TramNumero" header="TramNumero" [sortable]="true" [style]="{'width':'5.5em'}"></p-column>
-                <p-column field="NombreEmisor" header="NombreEmisor" [sortable]="true" [style]="{'width':'18em'}"></p-column>
-                <p-column field="TramFecha" header="TramFecha" [sortable]="true" [style]="{'width':'8em'}"></p-column>
-                <p-column field="TramAsunto" header="TramAsunto" [sortable]="true" [style]="{'width':'30em'}"></p-column>
-                <p-column field="TiDocAbrevia" header="TiDocAbrevia" [sortable]="true"></p-column>
-            </p-dataTable>
-       </div>
+		<div class="card-title ">
+			<input placeholder="Buscar..." type="text"  id="gb1" #filtroGlobal />
+			<span class="text-xs-right" >
+				<button (click)="addTramite()" pButton icon="fa-file-text-o" label="Nuevo"
+					class="btn btn-succes" >                   
+				</button>
+			</span>
+		</div>
+		<div class="card-text">
+			<p-dataTable [value]="enviosPresentar" [rows]="10" [paginator]="true"  
+			[pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="filtroGlobal" scrollable="true"  scrollWidth="100%"
+			selectionMode="single" >
+				<!--<p-column *ngFor="let col of columnDefs" [field]="col.field" [header]="col.header"></p-column>-->
+				<p-column styleClass="col-button" [style]="{'width':'6em'}">
+					<template pTemplate="header">
+						<button type="button" pButton icon="fa-refresh"></button>
+					</template>
+					<template let-car="rowData" pTemplate="body" >
+						<button type="button" pButton (click)="selectCar(car)" icon="fa-pencil-square-o" class="btn"></button>
+						<button type="button" pButton (click)="deleteCar(car)" icon="fa-trash" class="btn"></button>
+					</template>
+				</p-column>
+				<p-column field="TramNumero" header="TramNumero" [sortable]="true" [style]="{'width':'5.5em'}"></p-column>
+				<p-column field="NombreEmisor" header="NombreEmisor" [sortable]="true" [style]="{'width':'18em'}"></p-column>
+				<p-column field="TramFecha" header="TramFecha" [sortable]="true" [style]="{'width':'8em'}"></p-column>
+				<p-column field="TramAsunto" header="TramAsunto" [sortable]="true" [style]="{'width':'30em'}"></p-column>
+				<p-column field="TiDocAbrevia" header="TiDocAbrevia" [sortable]="true"></p-column>
+			</p-dataTable>
+		</div>
     </div>
 </div>
-<p-dialog header="Car Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-    <form name="form">
-        <div class="modal-header">
-            <button type="button"
-                    class="close"
-                    ng-click="cancel()"
-                    data-dismiss="modal"
-                    aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title">{{headerTitle}}</h4>
-        </div>
-        <div class="form-horizontal">
-           <div class="form-group">
-                        <label for="lblFecha" class="col-lg-2 control-label">Fecha</label>
-                        <div class="col-lg-3">
-                            <input type="date"
-                                   class="form-control"
-                                   ng-model="tramite.TramFechaDoc "
-                                   ng-required="true">
-                        </div>
+<p-dialog header="Car Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [resizable]="false"  >
+	<form name="form">
+		<div>
+			<div class="form-group row ">
+				<div class="form-group ">
+					<label for="lblFecha" class="col-lg-2 col-form-label col-form-label-sm">Fecha</label>
+					<div class="col-lg-3">
+						<input type="date"
+								class="form-control form-control-sm"
+								ng-model="tramite.TramFechaDoc "
+								>
+					</div>
 
-                        <label for="lblNumero" class="col-lg-2 control-label">Tipo/Numero</label>
-                        <div class="col-lg-2">
-                            <select ng-model="tramite.TiDoId"
-                                    ng-options="value.Id as value.TiDocNombre for value in tipoDocumentos" class="form-control" ng-required="true">
-                                <option>--</option>
-                            </select>
-                            <div>
-                                Id: {{tramite.TiDoId}}
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <input type="text"
-                                   class="form-control"
-                                   ng-model="tramite.TramNumero"
-                                   ng-required="true" placeholder="Numero Documento ">
-                        </div>
-             </div>
-        </div>       
+					<label for="lblNumero" class="col-lg-2 col-form-label col-form-label-sm">Tipo/Numero</label>
+					<div class="col-lg-2">
+						<select ng-model="tramite.TiDoId"
+								ng-options="value.Id as value.TiDocNombre for value in tipoDocumentos" class="form-control form-control-md" >
+							<option>--</option>
+						</select>                            
+					</div>
+					<div class="col-lg-3">
+						<input type="text"
+								class="form-control form-control-md"
+								ng-model="tramite.TramNumero"
+								placeholder="Numero Documento ">
+					</div>
+				</div>
+				<div class="form-group">
+						<label for="lblRemitente" class="col-lg-2 col-form-label col-form-label-sm">Remitente</label>
+						<div class="col-lg-10">
+							<select ng-model="tramite.TramCodEmisor"
+									ng-options="value.id_persona as value.nombrecom for value in personales" class="form-control form-control-md" >
+								<option>--</option>
+							</select>
 
-         <footer>
-            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-                <button type="button" pButton icon="fa-close" (click)="enviarTramite()" label="Enviar" *ngIf="muestraEnviar"></button>
-                <button type="button" pButton icon="fa-check" (click)="save()" label="Guardar"></button>
-                <button type="button" pButton icon="fa-check" (click)="cancel()" label="Cancelar"></button>
-                
-            </div>
-        </footer>
+						</div>
+						
+				</div>
+				<div class="form-group">
+					<label for="lblAsunto" class="col-lg-2 col-form-label col-form-label-sm">Asunto</label>
+					<div class="col-lg-10">
+						<input type="text"
+								class="form-control form-control-md"
+								ng-model="tramite.TramAsunto"
+								>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="lnlReferencia" class="col-lg-2 col-form-label col-form-label-sm">Referencia</label>
+					<div class="col-lg-10">
+						<input type="text"
+								class="form-control"
+								ng-model="tramite.TramDocRefere"
+								>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail" class="col-lg-2 col-form-label col-form-label-sm">Observaciones</label>
+					<div class="col-lg-10">
+						<input type="text"
+								class="form-control"
+								ng-model="tramite.TramObserva"
+								>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="form-group row" >				
+				<label for="lblAdjunto" class="col-lg-2 col-form-label col-form-label-sm">Destinatario Interno</label>
+				<div class="col-lg-2 form-check form-check-inline">
+					<label class="form-check-label col-form-label-sm">
+						<input type="radio" name="personal_ie" class="form-check-input " ng-model="personal.interno" value="true">
+						Interno
+					</label>
+					<label class="form-check-label col-form-label-sm">
+						<input type="radio" name="personal_ie"  class="form-check-input " ng-model="personal.interno" value="false">
+						Externo
+					</label>
+				</div>
+				<div  class="col-lg-2 form-check form-check-inline"><!---->
+					<label class="form-check-label col-form-label-sm">
+						<input type="radio" name="personal_oc" class="form-check-input" ng-model="personal.copia" value="false">
+						Original
+					</label>
+					<label class="form-check-label col-form-label-sm">
+					<input type="radio" name="personal_oc" class="form-check-input" ng-model="personal.copia" value="true">
+						Copia
+					</label>
+				</div>
+				<div class="form-group ">
+					<label for="lblObserva" class="col-lg-1 col-form-label col-form-label-sm">Observa</label>
+					<div class="col-lg-4">
+						<input type="text"
+								class="form-control"
+								ng-model="personal.observa"
+								>
+					</div>
+					<button class="btn btn-info btn-sm " pButton icon="fa-plus-circle" ng-click="buscarInterno()">
+						
+					</button>
+				</div>
+				
+			</div>
+		</div>
+
+		<footer>
+			<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+				<button type="button" pButton icon="fa-close" (click)="enviarTramite()" label="Enviar" *ngIf="muestraEnviar"></button>
+				<button type="button" pButton icon="fa-check" (click)="save()" label="Guardar"></button>
+				<button type="button" pButton icon="fa-check" (click)="cancel()" label="Cancelar"></button>
+				
+			</div>
+		</footer>
     </form>
  </p-dialog>
