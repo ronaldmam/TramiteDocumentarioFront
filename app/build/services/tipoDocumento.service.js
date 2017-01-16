@@ -11,19 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Rx_1 = require('rxjs/Rx');
-var PersonalService = (function () {
-    function PersonalService(http) {
+var TipoDocumentoService = (function () {
+    //private baseUrl2: string = 'http://localhost:8081/TramiteDocumentarioJava/rest/tramitesmovi/';
+    function TipoDocumentoService(http) {
         this.http = http;
-        this.baseUrl = 'http://tramite-ronaldmam.rhcloud.com/rest/personal/';
+        this.baseUrl = 'http://tramite-ronaldmam.rhcloud.com/rest/tipodocumento/';
     }
-    PersonalService.prototype.getAllPersonalByArea = function (codcap) {
+    TipoDocumentoService.prototype.getAllTipoDocumentos = function () {
         return this.http
-            .get(this.baseUrl + "getrhppersobyareacap/" + codcap)
+            .get(this.baseUrl)
             .map(function (r) { return r.json(); })
             .catch(this.handleError);
     };
     // this could also be a private method of the component class
-    PersonalService.prototype.handleError = function (error) {
+    TipoDocumentoService.prototype.handleError = function (error) {
         // log error
         // could be something more sofisticated
         var errorMsg = error.message; // || `Yikes! There was was a problem with our hyperdrive device and we couldn't retrieve your data!`
@@ -31,11 +32,11 @@ var PersonalService = (function () {
         // throw an application level error
         return Rx_1.Observable.throw(errorMsg);
     };
-    PersonalService = __decorate([
+    TipoDocumentoService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], PersonalService);
-    return PersonalService;
+    ], TipoDocumentoService);
+    return TipoDocumentoService;
 }());
-exports.PersonalService = PersonalService;
-//# sourceMappingURL=personal.service.js.map
+exports.TipoDocumentoService = TipoDocumentoService;
+//# sourceMappingURL=tipoDocumento.service.js.map

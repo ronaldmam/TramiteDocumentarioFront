@@ -9,7 +9,7 @@
 		<div class="card-title ">
 			<input placeholder="Buscar..." type="text"  id="gb1" #filtroGlobal />
 			<span class="text-xs-right" >
-				<button (click)="addTramite()" pButton icon="fa-file-text-o" label="Nuevo"
+				<button (click)="addEmitido()" pButton icon="fa-file-text-o" label="Nuevo"
 					class="btn btn-succes" >                   
 				</button>
 			</span>
@@ -37,39 +37,42 @@
 		</div>
 	</div>
 </div>
-<p-dialog header="Car Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" contentHeight="400"  >
+<p-dialog [header]="headerTitle" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" contentHeight="400"  >
 	<form name="form">
-		<div >
+		<div *ngIf="tramiteEnvio">
 			<div class="form-group row ">
 				<div class="form-group ">
 					<label for="lblFecha" class="col-lg-2 col-form-label col-form-label-sm">Fecha</label>
 					<div class="col-lg-3">
-						<input type="date"
+						<input type="date"  name="TramFechaDoc"
 								class="form-control form-control-sm"
-								ng-model="tramite.TramFechaDoc "
+								[(ngModel)]="tramiteEnvio.TramFechaDoc"
+								
 								>
 					</div>
-
+ 
 					<label for="lblNumero" class="col-lg-2 col-form-label col-form-label-sm">Tipo/Numero</label>
 					<div class="col-lg-2">
-						<select ng-model="tramite.TiDoId"
-								ng-options="value.Id as value.TiDocNombre for value in tipoDocumentos" class="form-control form-control-md" >
-							<option>--</option>
-						</select>                            
+						<select  name="tipoDocumento"
+								[(ngModel)]="tramiteEnvio.TiDoId"
+								 class="form-control form-control-md" >
+							<option  *ngFor="let tipoDocumento of tipoDocumentos" [ngValue]="tipoDocumento.Id">{{tipoDocumento.TiDocNombre}}</option>
+						</select>   
+						<!--{{tramiteEnvio.TiDoId}}-->
 					</div>
 					<div class="col-lg-3">
-						<input type="text"
+						<input type="text" name="TramNumero"
 								class="form-control form-control-md"
-								ng-model="tramite.TramNumero"
+								[(ngModel)]="tramiteEnvio.TramNumero"
 								placeholder="Numero Documento ">
 					</div>
 				</div>
 				<div class="form-group">
 						<label for="lblRemitente" class="col-lg-2 col-form-label col-form-label-sm">Remitente</label>
 						<div class="col-lg-10">
-							<select ng-model="tramite.TramCodEmisor"
-									ng-options="value.id_persona as value.nombrecom for value in personales" class="form-control form-control-md" >
-								<option>--</option>
+							<select  name="TramCodEmisor" [(ngModel)]="tramiteEnvio.TramCodEmisor"
+									class="form-control form-control-md" >
+								<option *ngFor="let personalByArea of personalByAreas" [ngValue]="personalByArea.id_persona">{{personalByArea.nombrecom}}</option>
 							</select>
 
 						</div>
@@ -78,33 +81,33 @@
 				<div class="form-group">
 					<label for="lblAsunto" class="col-lg-2 col-form-label col-form-label-sm">Asunto</label>
 					<div class="col-lg-10">
-						<input type="text"
+						<input type="text"  name="TramAsunto"
 								class="form-control form-control-md"
-								ng-model="tramite.TramAsunto"
+								[(ngModel)]="tramiteEnvio.TramAsunto"
 								>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="lnlReferencia" class="col-lg-2 col-form-label col-form-label-sm">Referencia</label>
 					<div class="col-lg-10">
-						<input type="text"
+						<input type="text" name="TramDocRefere"
 								class="form-control"
-								ng-model="tramite.TramDocRefere"
+								[(ngModel)]="tramiteEnvio.TramDocRefere"
 								>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputEmail" class="col-lg-2 col-form-label col-form-label-sm">Observaciones</label>
 					<div class="col-lg-10">
-						<input type="text"
+						<input type="text" name="TramObserva"
 								class="form-control"
-								ng-model="tramite.TramObserva"
+								[(ngModel)]="tramiteEnvio.TramObserva"
 								>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div>
+		<div *ngIf="mostrarCtrlEnvio">
 			<div class="form-group row" >				
 				<label for="lblAdjunto" class="col-lg-2 col-form-label col-form-label-sm">Destinatario Interno</label>
 				<div class="col-lg-2 form-check form-check-inline">
@@ -162,10 +165,11 @@
 			</p-dataTable>
 		</div>-->
 		<footer>
-			<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-				<button type="button" pButton icon="fa-close" (click)="enviarTramite()" label="Enviar" *ngIf="muestraEnviar"></button>
-				<button type="button" pButton icon="fa-check" (click)="save()" label="Guardar"></button>
+			<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">				
 				<button type="button" pButton icon="fa-check" (click)="cancel()" label="Cancelar"></button>
+				<button type="button" pButton icon="fa-check" (click)="save()" label="Guardar"></button>
+				<button type="button" pButton icon="fa-close" (click)="enviarTramite()" label="Enviar" *ngIf="muestraEnviar"></button>
+				
 				
 			</div>
 		</footer>

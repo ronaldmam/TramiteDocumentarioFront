@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var tramite_service_1 = require("../services/tramite.service");
+var core_1 = require('@angular/core');
+var tramite_service_1 = require('../services/tramite.service');
 var BandejaComponent = (function () {
     function BandejaComponent(_tramiteService) {
         this._tramiteService = _tramiteService;
@@ -111,14 +111,14 @@ var BandejaComponent = (function () {
         this.recibido = _valorRadio;
         this.getAllPendiente(this.idCap, this.idUsuario, this.recibido.toString(), this.supervisor);
     };
+    BandejaComponent = __decorate([
+        core_1.Component({
+            selector: 'bandeja',
+            templateUrl: 'app/views/bandeja.component.html'
+        }), 
+        __metadata('design:paramtypes', [tramite_service_1.TramiteService])
+    ], BandejaComponent);
     return BandejaComponent;
 }());
-BandejaComponent = __decorate([
-    core_1.Component({
-        selector: 'bandeja',
-        templateUrl: 'app/views/bandeja.component.html'
-    }),
-    __metadata("design:paramtypes", [tramite_service_1.TramiteService])
-], BandejaComponent);
 exports.BandejaComponent = BandejaComponent;
 //# sourceMappingURL=bandeja.component.js.map

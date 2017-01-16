@@ -3,14 +3,15 @@ import { Headers, Http ,Response} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
-export class PersonalService {
-	private baseUrl: string = 'http://tramite-ronaldmam.rhcloud.com/rest/personal/';
-
+export class TipoDocumentoService {
+	private baseUrl: string = 'http://tramite-ronaldmam.rhcloud.com/rest/tipodocumento/';
+	//private baseUrl2: string = 'http://localhost:8081/TramiteDocumentarioJava/rest/tramitesmovi/';
+	
 	constructor(private http: Http) { }
 
-	getAllPersonalByArea(codcap: string) {
+	getAllTipoDocumentos() {
 	return this.http
-			.get(this.baseUrl+"getrhppersobyareacap/"+codcap) 
+			.get(this.baseUrl) 
 			.map((r: Response) => r.json() )             
 			.catch(this.handleError);
 	}
@@ -26,4 +27,4 @@ export class PersonalService {
 	return Observable.throw(errorMsg);
 	}
 	
-	}
+}

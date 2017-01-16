@@ -16,12 +16,16 @@ import { DashboardComponent }   from './dashboard.component';
 import { BandejaComponent } from './controllers/bandeja.component';
 import { EnvioComponent } from './controllers/envio.component';
 import { HeroService } from './hero.service';
+
 import { TramiteService } from './services/tramite.service';
+import { TipoDocumentoService } from './services/tipoDocumento.service';
+import { PersonalService } from './services/personal.service';
+
 
 @NgModule({
   imports:      [ BrowserModule ,  FormsModule, HttpModule, routing,AgGridModule.withNg2ComponentSupport(),DataTableModule,SharedModule, ButtonModule,DialogModule],
   declarations: [ AppComponent,HeroesComponent, HeroDetailComponent, DashboardComponent,BandejaComponent,EnvioComponent ],
-  providers: [  HeroService, TramiteService  ],
+  providers: [  HeroService, TramiteService, TipoDocumentoService, PersonalService ],
   bootstrap:    [ AppComponent]
 })
 export class AppModule { 
