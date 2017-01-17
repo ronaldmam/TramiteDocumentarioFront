@@ -101,6 +101,18 @@ var EnvioComponent = (function () {
             _this.personalByAreas = data;
         }, function (err) { _this.errorMessage = err; }, function () { return _this.isLoading = false; });
     };
+    EnvioComponent.prototype.saveEnvio = function () {
+        var _this = this;
+        this._tramiteService.save(this.tramiteEnvio)
+            .subscribe(function (ents) {
+            _this.displayDialog = false;
+        }, function (err) {
+            console.log(err); // Log errors if any
+        });
+    };
+    EnvioComponent.prototype.onRowSelect = function (event) {
+        this.idEnvioPresentar = event.data.Id;
+    };
     EnvioComponent = __decorate([
         core_1.Component({
             selector: 'envio',

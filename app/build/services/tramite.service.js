@@ -45,6 +45,11 @@ var TramiteService = (function () {
             .map(function (r) { return r.json(); })
             .catch(function (error) { return Rx_1.Observable.throw(error.json().error || 'Server error'); });
     };
+    TramiteService.prototype.save = function (_tramiteEnvio) {
+        return this.http.post(this.baseUrl + "save", _tramiteEnvio) // ...using post request
+            .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
+            .catch(function (error) { return Rx_1.Observable.throw(error.json().error || 'Server error'); }); //...errors if any
+    };
     // this could also be a private method of the component class
     TramiteService.prototype.handleError = function (error) {
         // log error

@@ -30,6 +30,8 @@ export class EnvioComponent implements OnInit {
 	private mostrarCtrlEnvio:boolean;
 	private muestraEnviar:boolean;
 	private headerTitle:string;
+	private selectedEnvioPresentar: any;
+	private idEnvioPresentar:number;
 
 
 	constructor(private _tramiteService: TramiteService,
@@ -126,5 +128,21 @@ export class EnvioComponent implements OnInit {
 			);
 
 	}
+
+	saveEnvio() {
+		 this._tramiteService.save(this.tramiteEnvio)
+		 .subscribe(
+			 ents => {
+			 	this.displayDialog=false;
+			 },
+			 err => {
+                console.log(err);// Log errors if any
+             });		 
+	}
+
+	onRowSelect(event) {    
+    	this.idEnvioPresentar = event.data.Id;
+    	
+  }
 
 }
