@@ -34,6 +34,12 @@ export class TramiteService {
 			.map((r: Response) => r.json() )
 			.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
 	}
+	getTramiteById(_trMoid:number){
+		return this.http
+			.get(this.baseUrl+ _trMoid )
+			.map((r: Response) => r.json() )
+			.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+	}
 
 	newTramite(){
 		return this.http
@@ -42,11 +48,14 @@ export class TramiteService {
 			.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
 
 	}
+
+
 	save(_tramiteEnvio:Object){
 		return this.http.post(this.baseUrl+ "save", _tramiteEnvio) // ...using post request
                          .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
                          .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
 	}
+
 
 	// this could also be a private method of the component class
 	handleError (error: any) {

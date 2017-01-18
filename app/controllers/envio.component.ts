@@ -88,7 +88,7 @@ export class EnvioComponent implements OnInit {
 					this.tramiteEnvio.TramCodCAP=this.codCap; 
 					this.displayDialog=true;
 					this.getAllTipoDocumentos();
-					this.getAllPersonalByArea();
+					this.getAllPersonalByArea(this.codCap);
 					 if (this.tramiteEnvio.Id > 0)
 					{
 						this.headerTitle = 'Editar Documento';
@@ -107,7 +107,15 @@ export class EnvioComponent implements OnInit {
 			);
 
 	}
-
+	editEmitido(_trMoid:number){
+		this._tramiteService.getTramiteById(_trMoid)
+			.subscribe(
+			data => { this.tramiteEnvio = data;			 
+						this.displayDialog=true;},//lo llamo aqui xq sino le pierde el estado
+			err => { this.errorMessage = err },
+			() => this.isLoading = false
+			);
+	}
 	getAllTipoDocumentos() {
 		this._tipoDocumentoService.getAllTipoDocumentos()
 			.subscribe(
@@ -118,8 +126,8 @@ export class EnvioComponent implements OnInit {
 			);
 
 	}
-	getAllPersonalByArea() {
-		this._personalService.getAllPersonalByArea(this.codCap)
+	getAllPersonalByArea(codCap:string) {
+		this._personalService.getAllPersonalByArea(codCap)
 			.subscribe(
 			data => { this.personalByAreas = data;
 				},
@@ -128,7 +136,7 @@ export class EnvioComponent implements OnInit {
 			);
 
 	}
-
+	
 	saveEnvio() {
 		 this._tramiteService.save(this.tramiteEnvio)
 		 .subscribe(

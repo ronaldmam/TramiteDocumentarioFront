@@ -23,9 +23,10 @@
 					<template pTemplate="header">
 						<button type="button" pButton icon="fa-refresh"></button>
 					</template>
-					<template let-car="rowData" pTemplate="body" >
-						<button type="button" pButton (click)="selectCar(car)" icon="fa-pencil-square-o" class="btn"></button>
-						<button type="button" pButton (click)="deleteCar(car)" icon="fa-trash" class="btn"></button>
+					<template let-col let-envioPresentar="rowData" pTemplate="body" >
+						<button type="button" pButton (click)="editEmitido(envioPresentar.Id)" icon="fa-pencil-square-o" class="btn"></button>
+						<button type="button" pButton (click)="deleteCar(envioPresentar.Id)" icon="fa-trash" class="btn"></button>
+						<span>{{envioPresentar.Id}} </span>
 					</template>
 				</p-column>
 				<p-column field="TramNumero" header="TramNumero" [sortable]="true" [style]="{'width':'5.5em'}"></p-column>

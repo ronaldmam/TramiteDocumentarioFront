@@ -39,6 +39,12 @@ var TramiteService = (function () {
             .map(function (r) { return r.json(); })
             .catch(function (error) { return Rx_1.Observable.throw(error.json().error || 'Server error'); });
     };
+    TramiteService.prototype.getTramiteById = function (_trMoid) {
+        return this.http
+            .get(this.baseUrl + _trMoid)
+            .map(function (r) { return r.json(); })
+            .catch(function (error) { return Rx_1.Observable.throw(error.json().error || 'Server error'); });
+    };
     TramiteService.prototype.newTramite = function () {
         return this.http
             .get(this.baseUrl + 'new')

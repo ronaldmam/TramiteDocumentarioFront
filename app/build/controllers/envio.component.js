@@ -72,7 +72,7 @@ var EnvioComponent = (function () {
             _this.tramiteEnvio.TramCodCAP = _this.codCap;
             _this.displayDialog = true;
             _this.getAllTipoDocumentos();
-            _this.getAllPersonalByArea();
+            _this.getAllPersonalByArea(_this.codCap);
             if (_this.tramiteEnvio.Id > 0) {
                 _this.headerTitle = 'Editar Documento';
                 _this.mostrarCtrlEnvio = true;
@@ -87,6 +87,16 @@ var EnvioComponent = (function () {
         function (//lo llamo aqui xq sino le pierde el estado
             err) { _this.errorMessage = err; }, function () { return _this.isLoading = false; });
     };
+    EnvioComponent.prototype.editEmitido = function (_trMoid) {
+        var _this = this;
+        this._tramiteService.getTramiteById(_trMoid)
+            .subscribe(function (data) {
+            _this.tramiteEnvio = data;
+            _this.displayDialog = true;
+        }, //lo llamo aqui xq sino le pierde el estado
+        function (//lo llamo aqui xq sino le pierde el estado
+            err) { _this.errorMessage = err; }, function () { return _this.isLoading = false; });
+    };
     EnvioComponent.prototype.getAllTipoDocumentos = function () {
         var _this = this;
         this._tipoDocumentoService.getAllTipoDocumentos()
@@ -94,9 +104,9 @@ var EnvioComponent = (function () {
             _this.tipoDocumentos = data;
         }, function (err) { _this.errorMessage = err; }, function () { return _this.isLoading = false; });
     };
-    EnvioComponent.prototype.getAllPersonalByArea = function () {
+    EnvioComponent.prototype.getAllPersonalByArea = function (codCap) {
         var _this = this;
-        this._personalService.getAllPersonalByArea(this.codCap)
+        this._personalService.getAllPersonalByArea(codCap)
             .subscribe(function (data) {
             _this.personalByAreas = data;
         }, function (err) { _this.errorMessage = err; }, function () { return _this.isLoading = false; });
