@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 // es para el datatable
-import {DataTableModule,SharedModule} from 'primeng/primeng';
+import {DataTableModule,SharedModule, OrderListModule,DataListModule} from 'primeng/primeng';
 import {ButtonModule,DialogModule} from 'primeng/primeng';
 import { TramiteService } from '../services/tramite.service';
 import { TipoDocumentoService } from '../services/tipoDocumento.service';
 import { PersonalService } from '../services/personal.service';
+import { DestinatarioService } from '../services/destinatario.service';
 
 
 @Component({
@@ -32,11 +33,13 @@ export class EnvioComponent implements OnInit {
 	private headerTitle:string;
 	private selectedEnvioPresentar: any;
 	private idEnvioPresentar:number;
+	private destinatarios:any = [];
+	private destinatariosPresentar:any=[];
 
 
 	constructor(private _tramiteService: TramiteService,
 	private _tipoDocumentoService: TipoDocumentoService,
-	private _personalService: PersonalService){ 
+	private _personalService: PersonalService,private _destinatarioService: DestinatarioService){ 
 	/*  this.columnDefs = [
 				{ header: "TramNumero", field: "TramNumero"},
 				{ header: "NombreEmisor", field: "NombreEmisor", sortable:"true"},
@@ -81,26 +84,34 @@ export class EnvioComponent implements OnInit {
 
 		}     
 	}
+	cargarDatosModal(){
+		this.displayDialog=true;
+		if (this.tipoDocumentos)
+		this.getAllTipoDocumentos();
+		if (this.personalByAreas)
+		this.getAllPersonalByArea(this.codCap);
+		if (this.tramiteEnvio.Id > 0)
+		{
+			this.headerTitle = 'Editar Documento';
+			this.mostrarCtrlEnvio = true;
+			this.muestraEnviar = true;
+			this.getAllDestinatarioByTram(this.tramiteEnvio.Id);
+		}
+		else
+		{
+			this.headerTitle = 'Nuevo Documento';
+			this.mostrarCtrlEnvio = false;
+			this.muestraEnviar = false;
+		}
+		   
+	}
 	addEmitido(codcap: string) {
 		this._tramiteService.newTramite()
 			.subscribe(
 			data => { this.tramiteEnvio = data;	
 					this.tramiteEnvio.TramCodCAP=this.codCap; 
-					this.displayDialog=true;
-					this.getAllTipoDocumentos();
-					this.getAllPersonalByArea(this.codCap);
-					 if (this.tramiteEnvio.Id > 0)
-					{
-						this.headerTitle = 'Editar Documento';
-						this.mostrarCtrlEnvio = true;
-						this.muestraEnviar = true;
-					}
-					else
-					{
-						this.headerTitle = 'Nuevo Documento';
-						this.mostrarCtrlEnvio = false;
-						this.muestraEnviar = false;
-					}
+					this.cargarDatosModal();
+					
 						},//lo llamo aqui xq sino le pierde el estado
 			err => { this.errorMessage = err },
 			() => this.isLoading = false
@@ -111,7 +122,7 @@ export class EnvioComponent implements OnInit {
 		this._tramiteService.getTramiteById(_trMoid)
 			.subscribe(
 			data => { this.tramiteEnvio = data;			 
-						this.displayDialog=true;},//lo llamo aqui xq sino le pierde el estado
+						this.cargarDatosModal();},//lo llamo aqui xq sino le pierde el estado
 			err => { this.errorMessage = err },
 			() => this.isLoading = false
 			);
@@ -137,10 +148,10 @@ export class EnvioComponent implements OnInit {
 
 	}
 	
-	saveEnvio() {
+	saveEmitido() {
 		 this._tramiteService.save(this.tramiteEnvio)
 		 .subscribe(
-			 ents => {
+			 realizar => {
 			 	this.displayDialog=false;
 			 },
 			 err => {
@@ -151,6 +162,64 @@ export class EnvioComponent implements OnInit {
 	onRowSelect(event) {    
     	this.idEnvioPresentar = event.data.Id;
     	
-  }
+	}
+	// en el formulario  de Nuevo y editar Documento
+	getAllDestinatarioByTram(idTramite:number){
+		this._destinatarioService.getAllDestinatarioByTram(idTramite)
+			.subscribe(
+				data => { this.destinatarios = data;
+						this. mostrarGrillaDestinatario();
+					},
+				err => { this.errorMessage = err },
+				() => this.isLoading = false
+			);
+
+	}
+	mostrarGrillaDestinatario(){
+		this.destinatariosPresentar=[];
+		let _valorDoc:string="";
+		let _nomDesti:string="";
+		let _lugarDesti:string="";
+		let _ambDesti:string="";
+		let _ambtipo:string="";
+
+		for(let destinatario of this.destinatarios ){
+			if (destinatario.DestPersoInterno != null) {
+                 _valorDoc = destinatario.DestPersoInterno;
+                 _nomDesti = destinatario.nombrecom;
+                 _lugarDesti = destinatario.nombre;
+             }
+             else {
+                 if (destinatario.EnExDNI != null) {
+                     _valorDoc = destinatario.EnExDNI;
+                     _nomDesti = destinatario.EnExNombre;
+                     _lugarDesti = "";
+                 }
+                 else {
+                     _valorDoc = destinatario.EnExRUC;
+                     _nomDesti = destinatario.EnExNombre;
+                     _lugarDesti = "";
+                 }
+             }
+             if (destinatario.DestAmbito == "0")
+                 _ambDesti = "Interno"
+             else
+                 _ambDesti = "Externo"
+
+             if (destinatario.DestCopia == true)
+                 _ambtipo = "Copia"
+             else
+                 _ambtipo = "Original"
+			this.destinatariosPresentar.push(
+				{
+					Id: destinatario.Id, documento: _valorDoc, nombre: _nomDesti, lugar: _lugarDesti, ambito: _ambDesti, tipo: _ambtipo
+				}
+			);
+		}
+		
+
+	}
+	
+
 
 }

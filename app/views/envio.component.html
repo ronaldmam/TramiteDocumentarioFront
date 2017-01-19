@@ -25,8 +25,7 @@
 					</template>
 					<template let-col let-envioPresentar="rowData" pTemplate="body" >
 						<button type="button" pButton (click)="editEmitido(envioPresentar.Id)" icon="fa-pencil-square-o" class="btn"></button>
-						<button type="button" pButton (click)="deleteCar(envioPresentar.Id)" icon="fa-trash" class="btn"></button>
-						<span>{{envioPresentar.Id}} </span>
+						<button type="button" pButton (click)="deleteCar(envioPresentar.Id)" icon="fa-trash" class="btn"></button>					
 					</template>
 				</p-column>
 				<p-column field="TramNumero" header="TramNumero" [sortable]="true" [style]="{'width':'5.5em'}"></p-column>
@@ -108,67 +107,78 @@
 				</div>
 			</div>
 		</div>
-		<div *ngIf="mostrarCtrlEnvio">
-			<div class="form-group row" >				
-				<label for="lblAdjunto" class="col-lg-2 col-form-label col-form-label-sm">Destinatario Interno</label>
-				<div class="col-lg-2 form-check form-check-inline">
-					<label class="form-check-label col-form-label-sm">
-						<input type="radio" name="personal_ie" class="form-check-input " ng-model="personal.interno" value="true">
-						Interno
-					</label>
-					<label class="form-check-label col-form-label-sm">
-						<input type="radio" name="personal_ie"  class="form-check-input " ng-model="personal.interno" value="false">
-						Externo
-					</label>
-				</div>
-				<div  class="col-lg-2 form-check form-check-inline"><!---->
-					<label class="form-check-label col-form-label-sm">
-						<input type="radio" name="personal_oc" class="form-check-input" ng-model="personal.copia" value="false">
-						Original
-					</label>
-					<label class="form-check-label col-form-label-sm">
-					<input type="radio" name="personal_oc" class="form-check-input" ng-model="personal.copia" value="true">
-						Copia
-					</label>
-				</div>
-				<div class="form-group ">
-					<label for="lblObserva" class="col-lg-1 col-form-label col-form-label-sm">Observa</label>
-					<div class="col-lg-4">
-						<input type="text"
-								class="form-control"
-								ng-model="personal.observa"
-								>
+		<div *ngIf="mostrarCtrlEnvio" class="ui-grid-row">
+			<label for="lblAdjunto" class="col-lg-12 col-form-label col-form-label-sm">Destinatario Interno</label>
+			<div class="form-group row"  class="col-sm-7"  >
+				<div class="ui-grid-row">
+					<div class="col-lg-6 form-check form-check-inline">
+						<label class="form-check-label col-form-label-sm">
+							<input type="radio" name="personal_ie" class="form-check-input " ng-model="personal.interno" value="true">
+							Interno
+						</label>
+						<label class="form-check-label col-form-label-sm">
+							<input type="radio" name="personal_ie"  class="form-check-input " ng-model="personal.interno" value="false">
+							Externo
+						</label>
 					</div>
-					<button class="btn btn-info btn-sm " pButton icon="fa-plus-circle" ng-click="buscarInterno()">
+					<div  class="col-lg-6 form-check form-check-inline"><!---->
+						<label class="form-check-label col-form-label-sm">
+							<input type="radio" name="personal_oc" class="form-check-input" ng-model="personal.copia" value="false">
+							Original
+						</label>
+						<label class="form-check-label col-form-label-sm">
+						<input type="radio" name="personal_oc" class="form-check-input" ng-model="personal.copia" value="true">
+							Copia
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div>
+						<label for="lblObserva" class="col-lg-3 col-form-label col-form-label-sm">Observa</label>
+						<div class="col-lg-9">
+							<input type="text"
+									class="form-control"
+									ng-model="personal.observa"
+									>
+						</div>
 						
-					</button>
+					</div>
+					<div>
+						<label for="lblObserva" class="col-lg-3 col-form-label col-form-label-sm">Destinatario</label>
+						<div class="col-lg-8">
+							<input type="text"
+									class="form-control"
+									ng-model="personal.observa"
+									>
+						</div>
+						<button class="btn btn-info btn-sm col-lg-1" pButton icon="fa-plus-circle" ng-click="buscarInterno()">
+							
+						</button>
+					</div>
+
 				</div>
 				
 			</div>
+			<!--Mostrar listado de destinatarios-->
+			<div class="col-sm-5" >
+				<p-dataList [value]="destinatariosPresentar"  >				
+					<template let-destinatario>
+						<div class="ui-helper-clearfix">
+							<!--<img src="showcase/resources/demo/images/car/{{car.brand}}.gif" style="display:inline-block;margin:2px 0 2px 2px" />-->
+							<button type="button" pButton (click)="deleteDestinatario(destinatario.Id)" icon="fa-trash" class="btn" style="display:inline-block;margin:2px 0 2px 2px"></button>
+							<div style="display:inline-block;font-size:14px;float:right;margin:15px 5px 0 0">{{destinatario.documento}} - {{destinatario.nombre}} - {{destinatario.lugar}}</div>
+						</div>
+						
+					</template>
+				</p-dataList>
+			</div>
 		</div>
 		<!--<div  class="col-sm-1"></div>-->
-	<!--	<div class="col-sm-12" >
-			<p-dataTable [value]="enviosPresentar"  scrollable="true"  
-			selectionMode="single">				
-				<p-column styleClass="col-button" [style]="{'width':'4em'}">
-					<template pTemplate="header">
-						<button type="button" pButton icon="fa-refresh"></button>
-					</template>
-					<template let-car="rowData" pTemplate="body" >						
-						<button type="button" pButton (click)="deleteCar(car)" icon="fa-trash" class="btn"></button>
-					</template>
-				</p-column>
-				<p-column field="TramNumero" header="TramNumero" [sortable]="true" [style]="{'width':'5.5em'}"></p-column>
-				<p-column field="NombreEmisor" header="NombreEmisor" [sortable]="true" [style]="{'width':'8em'}"></p-column>
-				<p-column field="TramFecha" header="TramFecha" [sortable]="true" [style]="{'width':'5em'}"></p-column>
-				<p-column field="TramAsunto" header="TramAsunto" [sortable]="true" [style]="{'width':'10em'}"></p-column>
-				<p-column field="TiDocAbrevia" header="TiDocAbrevia" [sortable]="true" [style]="{'width':'4em'}"></p-column>
-			</p-dataTable>
-		</div>-->
+		
 		<footer>
 			<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">				
 				<!--<button type="button" pButton icon="fa-check" (click)="cancel()" label="Cancelar"></button>-->
-				<button type="button" pButton icon="fa-check" (click)="saveEnvio()" label="Guardar"></button>
+				<button type="button" pButton icon="fa-check" (click)="saveEmitido()" label="Guardar"></button>
 				<button type="button" pButton icon="fa-close" (click)="enviarTramite()" label="Enviar" *ngIf="muestraEnviar"></button>
 				
 				

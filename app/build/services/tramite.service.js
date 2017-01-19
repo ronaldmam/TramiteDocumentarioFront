@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-require('../rxjs-extensions');
-var Rx_1 = require('rxjs/Rx');
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+require("../rxjs-extensions");
+var Rx_1 = require("rxjs/Rx");
 //import 'rxjs/add/operator/toPromise';
 var TramiteService = (function () {
     function TramiteService(http) {
@@ -65,11 +65,11 @@ var TramiteService = (function () {
         // throw an application level error
         return Rx_1.Observable.throw(errorMsg);
     };
-    TramiteService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], TramiteService);
     return TramiteService;
 }());
+TramiteService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], TramiteService);
 exports.TramiteService = TramiteService;
 //# sourceMappingURL=tramite.service.js.map
