@@ -25,7 +25,7 @@
 					</template>
 					<template let-col let-envioPresentar="rowData" pTemplate="body" >
 						<button type="button" pButton (click)="editEmitido(envioPresentar.Id)" icon="fa-pencil-square-o" class="btn"></button>
-						<button type="button" pButton (click)="deleteCar(envioPresentar.Id)" icon="fa-trash" class="btn"></button>					
+						<button type="button" pButton (click)="confirmaDeleteEmitido(envioPresentar.Id,envioPresentar.TramNumero)" icon="fa-trash" class="btn"></button>					
 					</template>
 				</p-column>
 				<p-column field="TramNumero" header="TramNumero" [sortable]="true" [style]="{'width':'5.5em'}"></p-column>
@@ -149,7 +149,7 @@
 						</div>
 						
 					</div>
-					<button class="btn btn-info btn-sm col-lg-1" pButton icon="fa-plus-circle" ng-click="buscarInterno()">							
+					<button class="btn btn-info btn-sm col-lg-1" pButton icon="fa-plus-circle" (click)="guardarDestinatario()">							
 					</button>
 				</div>
 				
@@ -158,12 +158,13 @@
 			</div>
 			<!--Mostrar listado de destinatarios-->
 			<div class="col-sm-5" >
+				<label for="lblDestiAgregados" class="col-lg-12 col-form-label col-form-label-sm" style="padding:0 0 0 0;">Destinatario Agregados</label>
 				<p-dataList [value]="destinatariosPresentar"  >				
 					<template let-destinatario>
 						<div class="ui-helper-clearfix">
 							<!--<img src="showcase/resources/demo/images/car/{{car.brand}}.gif" style="display:inline-block;margin:2px 0 2px 2px" />-->
 							<button type="button" pButton (click)="deleteDestinatario(destinatario.Id)" icon="fa-trash" class="btn" style="display:inline-block;margin:2px 0 2px 2px"></button>
-							<div style="display:inline-block;font-size:14px;margin:15px 5px 0 0">{{destinatario.documento}} - {{destinatario.nombre}} - {{destinatario.lugar}}</div>
+							<div style="display:inline-block;font-size:14px;margin:15px 5px 0 0">{{destinatario.documento}} - {{destinatario.nombre}} </div>
 						</div>
 						
 					</template>
@@ -176,7 +177,7 @@
 			<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">				
 				<!--<button type="button" pButton icon="fa-check" (click)="cancel()" label="Cancelar"></button>-->
 				<button type="button" pButton icon="fa-check" (click)="saveEmitido()" label="Guardar"></button>
-				<button type="button" pButton icon="fa-close" (click)="enviarTramite()" label="Enviar" *ngIf="muestraEnviar"></button>
+				<button type="button" pButton icon="fa-check" (click)="enviarEmitido()" label="Enviar" *ngIf="muestraEnviar"></button>
 				
 				
 			</div>
@@ -191,4 +192,9 @@
 		{{destinatario.nombrecom}}
 		</div>
 	<!--</div>-->
-</p-overlayPanel>	
+</p-overlayPanel>
+<!--LA ventana de confirmacion de eliminacion-->
+<p-confirmDialog width="425"></p-confirmDialog>
+
+<!--Mesaje popup-->
+<p-growl [value]="msgs"></p-growl>	

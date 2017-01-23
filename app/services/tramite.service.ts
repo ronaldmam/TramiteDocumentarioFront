@@ -50,12 +50,24 @@ export class TramiteService {
 	}
 
 
-	save(_tramiteEnvio:Object){
+	saveTramite(_tramiteEnvio:Object){
 		return this.http.post(this.baseUrl+ "save", _tramiteEnvio) // ...using post request
                          .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
                          .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
 	}
 
+	enviarTramite(_idTramite:number, _idzona:number, _usuarioLog:string) {
+		return this.http
+			.get(this.baseUrl+ "enviartramite?tramiteid=" + _idTramite + "&zonaid=" + _idzona + "&usuarioLog=" + _usuarioLog)
+			.map((r: Response) => r.json() )
+			.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+	}
+	
+	deleteTramite(_idTramite:number){
+		return this.http.post(this.baseUrl+ "delete/"+_idTramite, _idTramite) // ...using post request
+						.map((res:Response) => res.json()) // ...and calling .json() on the response to return data
+						.catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+	}
 
 	// this could also be a private method of the component class
 	handleError (error: any) {

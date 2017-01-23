@@ -14,6 +14,12 @@ export class DestinatarioService {
 			.map((r: Response) => r.json() )             
 			.catch(this.handleError);
 	}
+	newDestinatario(){
+		return this.http
+			.get(this.baseUrl+ 'new')
+			.map((r: Response) => r.json() )
+			.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+	}
 	 // delete Destinatario
 	deleteDestinatario(id:number){
 		return this.http.delete(this.baseUrl+ "delete/"+id) // ...using post request

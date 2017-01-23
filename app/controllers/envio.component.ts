@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Subject }	from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-// es para el datatable
+// Componentes de primefaces
 import {DataTableModule,SharedModule, DataListModule} from 'primeng/primeng';
 import {ButtonModule,DialogModule,OverlayPanel} from 'primeng/primeng';
+import {ConfirmDialogModule,ConfirmationService, GrowlModule, Message} from 'primeng/primeng';
 
 import { TramiteService } from '../services/tramite.service';
 import { TipoDocumentoService } from '../services/tipoDocumento.service';
@@ -13,10 +14,13 @@ import { DestinatarioService } from '../services/destinatario.service';
 
 @Component({
   selector: 'envio', 
-  templateUrl:'app/views/envio.component.html'
+  templateUrl:'app/views/envio.component.html',
+   providers: [ConfirmationService]
 })
 export class EnvioComponent implements OnInit { 
 	private codCap:string;
+	private idZona:number;
+	private idUsuario:string;
 	private tramitesEnvio:any=[];
 	private tipoDocumentos:any=[];
 	private personalByAreas:any=[];
@@ -27,6 +31,8 @@ export class EnvioComponent implements OnInit {
 	private errorMessage:string='';
 	//propiedades de modal
 	private displayDialog: boolean=false;
+	//mesage popup
+	 msgs: Message[] = [];
 	//propieadades de la ng-grid
 	private columnDefs:any[];
 	//propiedades del formulario agregar o Editar
@@ -37,17 +43,18 @@ export class EnvioComponent implements OnInit {
 	private idEnvioPresentar:number;
 	private destinatarios:any = [];
 	private destinatariosSearch:any = [];
-	//private destinatarioSelect: any;
+	private destinatario: any;
 	private destinatariosPresentar:any=[];
 	private searchTerms = new Subject<string>();
 	//Para agregar destinatario
 	  //Esto es para el destinatario
-    private personalDestinatario:any = {copiaOri:"0",internoExt: "0",id_zona:1, observa: "", destinatarioPersona:"",idPersona:""};
+    private personalDestinatario:any = {copiaOri:"0",internoExt: "0",id_zona:1, observa: "", destinatarioPersona:"",idPersona:"",idExt:0};
    
 
 	constructor(private _tramiteService: TramiteService,
 	private _tipoDocumentoService: TipoDocumentoService,
-	private _personalService: PersonalService,private _destinatarioService: DestinatarioService){ 
+	private _personalService: PersonalService,private _destinatarioService: DestinatarioService,
+	private _confirmationService: ConfirmationService){ 
 	/*  this.columnDefs = [
 				{ header: "TramNumero", field: "TramNumero"},
 				{ header: "NombreEmisor", field: "NombreEmisor", sortable:"true"},
@@ -58,7 +65,9 @@ export class EnvioComponent implements OnInit {
 
 	}
 	ngOnInit(){
-		this.codCap='4004';	
+		this.codCap='4004';	//Es la COdArea de usuario actulmente logueado
+		this.idZona=1;//Es la Zona de usuario actulmente logueado
+		this.idUsuario="00480798"; // este usuario es obtenido del login
 		this.getAllEmitidos(this.codCap);
 		//this.mostrarGrillaEmitido() ;		
 
@@ -182,20 +191,59 @@ export class EnvioComponent implements OnInit {
 	}
 	
 	saveEmitido() {
-		 this._tramiteService.save(this.tramiteEnvio)
+		 this._tramiteService.saveTramite(this.tramiteEnvio)
 		 .subscribe(
 			 realizar => {
 			 	this.displayDialog=false;
+				this.getAllEmitidos(this.codCap);
 			 },
 			 err => {
                 console.log(err);// Log errors if any
              });		 
 	}
-
+	enviarEmitido(){
+		if (this.destinatarios.length <= 0)
+		  alert("No tien destinatario");
+		else{
+			this._tramiteService.enviarTramite(this.tramiteEnvio.Id,this.idZona,this.idUsuario)
+				.subscribe(
+				data => { 
+						this.displayDialog=false;
+						this.getAllEmitidos(this.codCap);
+					},
+				err => { this.errorMessage = err },
+				() => this.isLoading = false
+				);
+		}	
+	}
+	deleteEmitido(_idTramite:number){
+		 this._tramiteService.deleteTramite(_idTramite)
+		 .subscribe(
+			 realizar => {
+			 	this.getAllEmitidos(this.codCap);
+			 },
+			 err => {
+                console.log(err);// Log errors if any
+             });		
+	}
+	confirmaDeleteEmitido(_idTramite:number,numero:string) {
+		this._confirmationService.confirm({
+			message: 'Esta seguro que desea elmininar el registro: '+numero+" ?",
+			header: 'Confirmacion de Eliminacion',
+			icon: 'fa fa-trash',
+			accept: () => {
+				this.deleteEmitido(_idTramite);
+				this.msgs = [];
+				this.msgs.push({severity:'info', summary:'Confirmacion', detail:'Registro:'+ numero+' eliminado'});
+			}
+		});
+	}
 	onRowSelect(event) {    
     	this.idEnvioPresentar = event.data.Id;
     	
 	}
+	/////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
 	// en el formulario  de Nuevo y editar Documento
 	getAllDestinatarioByTram(idTramite:number){
 		this._destinatarioService.getAllDestinatarioByTram(idTramite)
@@ -264,7 +312,60 @@ export class EnvioComponent implements OnInit {
 		
 
 	}
-	
+	guardarDestinatario(){
+		this._destinatarioService.newDestinatario()
+				.subscribe(
+				data => { this.destinatario = data;	
+						
+							this.destinatario.tramId = this.tramiteEnvio.Id;
+							this.destinatario.DestAmbito = this.personalDestinatario.internoExt;
+							this.destinatario.DestCopia = this.personalDestinatario.copiaOri=="0"?"false":"true";
+							this.destinatario.DestNoTramita = 0; //siempre va 0						
+							this.destinatario.DestObserva = this.personalDestinatario.observa;
+
+							if (this.personalDestinatario.internoExt == "0") {
+								this.destinatario.DestPersoInterno = this.personalDestinatario.idPersona;
+								this.destinatario.DestZona = this.personalDestinatario.id_zona;
+								if (this.personalDestinatario.id_zona != this.idZona)
+									this.destinatario.DestAmbito = "2";
+								else
+									this.destinatario.DestAmbito = "0";
+								this.destinatario.DestCap = this.codCap;
+								
+							} else {
+								this.destinatario.EnExId = this.personalDestinatario.idExt;
+								this.destinatario.DestZona ="0";
+							}
+							//ahora si guardamos en la base de datos
+							this.guardarBaseDestinatario(this.destinatario);
+						},
+					err => { this.errorMessage = err },
+					() => this.isLoading = false
+				);
+	}
+	guardarBaseDestinatario(_destinatario:any){
+		 this._destinatarioService.save(_destinatario)
+		 .subscribe(
+			 ejecutado => {
+			 	//Caargando nuevamente destinatario
+             	this.getAllDestinatarioByTram(this.tramiteEnvio.Id); 
+			 },
+			 err => {
+                console.log(err);// Log errors if any
+             });	
+	}
+
+	deleteDestinatario(_idDestinatario:number){
+		this._destinatarioService.deleteDestinatario(_idDestinatario)
+		 .subscribe(
+			 ejecutado => {
+			 	//Caargando nuevamente destinatario
+             	this.getAllDestinatarioByTram(this.tramiteEnvio.Id); 
+			 },
+			 err => {
+                console.log(err);// Log errors if any
+             });	
+	}
 
 
 }

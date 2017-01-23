@@ -6,7 +6,7 @@
                 <i class="fa-spinner fa-spin fa-2x"> </i> Getting values
             </div>
             <div class="card-title">
-                <input placeholder="Buscar..." type="text"  id="quickFilterInput" />
+                <input type="text"  id="quickFilterInput" #filtroGlobal  placeholder="Buscar..."/>
                 <span *ngFor="let bande of bandejas">
                     <label><input type="radio" name="bande" [value]="bande.value" [(ngModel)]="bandeja" checked (change)="cargarBandeja(bande.value)"/> {{bande.display}}</label>                    
                     
@@ -27,7 +27,7 @@
                 </button>
             </div>-->
             <div class="card-text">          
-                <ag-grid-ng2 #agGrid style="height:250px;width: 100%" class="ag-blue "
+                <!--<ag-grid-ng2 #agGrid style="height:250px;width: 100%" class="ag-blue "
                     [gridOptions]="gridOptions"
                     [columnDefs]="columnDefs"               
                     [rowData]="rowData"
@@ -37,7 +37,18 @@
                     (rowSelected)="onRowSelected($event)"              
                     >
 
-                </ag-grid-ng2>
+                </ag-grid-ng2>-->
+                <p-dataTable [value]="pendientesPresentar" [rows]="10" [paginator]="true"  
+                [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="filtroGlobal" scrollable="true"  scrollWidth="100%"
+                selectionMode="single" [(selection)]="selectedPendientePresentar" (onRowSelect)="onRowSelect($event)">
+                    <p-column field="TramNumero" header="TramNumero" [sortable]="true" [style]="{'width':'5.5em'}"></p-column>
+                    <p-column field="NombreEmisor" header="NombreEmisor" [sortable]="true" [style]="{'width':'18em'}"></p-column>
+                    <p-column field="TramFecha" header="TramFecha" [sortable]="true" [style]="{'width':'8em'}"></p-column>
+                    <p-column field="TramAsunto" header="TramAsunto" [sortable]="true" [style]="{'width':'30em'}"></p-column>
+                    <p-column field="TiTrAbrevia" header="TiTrAbrevia" [sortable]="true"></p-column>
+                     <p-column field="TrMoFecha" header="TrMoFecha" [sortable]="true"></p-column>
+                </p-dataTable>
+
             </div>
           </div>
     </div>
@@ -48,7 +59,7 @@
 
            <!-- <div ag-grid="gridOptions2" style="height:250px" class="ag-blue"></div>-->
          <div class="card-text">  
-           <ag-grid-ng2 #agGrid style="height:250px;width: 100%" class="ag-blue"
+          <!-- <ag-grid-ng2 #agGrid style="height:250px;width: 100%" class="ag-blue"
                 [gridOptions]="gridOptions2"
                 [columnDefs]="columnDefs2"               
                 [rowData]="rowData2"
@@ -57,7 +68,16 @@
                 rowSelection="single"
                               
                 >
-            </ag-grid-ng2>
+            </ag-grid-ng2>-->
+             <p-dataTable [value]="pendientesPresentar2" [rows]="10" [paginator]="true"  
+                [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="filtroGlobal" scrollable="true"  scrollWidth="100%"
+                >
+                    <p-column field="nombreUsu" header="nombreUsu" [sortable]="true" [style]="{'width':'9.5em'}"></p-column>
+                    <p-column field="TiTrAbrevia" header="TiTrAbrevia" [sortable]="true" [style]="{'width':'6em'}"></p-column>
+                    <p-column field="TrMoFecha" header="TrMoFecha" [sortable]="true" [style]="{'width':'8em'}"></p-column>
+                    <p-column field="Persona" header="Persona" [sortable]="true" [style]="{'width':'10em'}"></p-column>
+                    <p-column field="TrMoObserva" header="TrMoObserva" [sortable]="true"></p-column>                   
+                </p-dataTable>
          </div>  
         </div>
    

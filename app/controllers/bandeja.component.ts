@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AgGridModule} from 'ag-grid-ng2/main';
 import {GridOptions} from 'ag-grid/main';
+// Componentes de primefaces
+import {DataTableModule} from 'primeng/primeng';
 
 import { TramiteService } from '../services/tramite.service';
 @Component({
@@ -18,38 +20,10 @@ export class BandejaComponent {
 	private errorMessage:string='';
 	private isLoading: boolean = true;
 	private bandeja:number
-	//propieadades de la ng-grid
-	private gridOptions:GridOptions;
-    private showGrid:boolean;
-    private rowData:any[];
-    private columnDefs:any[];
-    private rowCount:string;
 
-	//propieadades de la ng-grid de movimiento
-	private gridOptions2:GridOptions;
-    private showGrid2:boolean;
-    private rowData2:any[];
-    private columnDefs2:any[];
-    private rowCount2:string;
 
-	constructor(private _tramiteService: TramiteService){
-		this.columnDefs = [
-            { headerName: "TramNumero", field: "TramNumero", sortingOrder: ["asc", "desc"], editable: false,width: 120 },
-			{ headerName: "NombreEmisor", field: "NombreEmisor",sortingOrder: ["asc", "desc"], editable: false, width: 290 },
-			{ headerName: "TramFecha", field: "TramFecha", sortingOrder: ["asc", "desc"], editable: false, width: 140},
-			{ headerName: "TramAsunto", field: "TramAsunto",sortingOrder: ["asc", "desc"], editable: false, width: 497 },
-			{ headerName: "TiTrAbrevia", field: "TiTrAbrevia",sortingOrder: ["asc", "desc"], editable: false, width: 47 },
-			{ headerName: "TrMoFecha", field: "TrMoFecha", sortingOrder: ["asc", "desc"], editable: false, width: 90 },
-
-        ];
-		this.columnDefs2 = [
-            { headerName: "nombreUsu", field: "nombreUsu", width: 160 },
-			{ headerName: "TiTrAbrevia", field: "TiTrAbrevia", width: 90 },
-			{ headerName: "TrMoFecha", field: "TrMoFecha", width: 120 },
-			{ headerName: "Persona", field: "Persona", width: 160 },
-			{ headerName: "TrMoObserva", field: "TrMoObserva", width: 497 }
-
-        ];
+	constructor(private _tramiteService: TramiteService){	
+	
 	}
 	getAllPendiente(codcap: string, id_usuario:string, recibido: string,superv:number) {
 		this._tramiteService.getAllPendiente(codcap,id_usuario,recibido,superv)
@@ -88,21 +62,13 @@ export class BandejaComponent {
 				}
 			);
 
-		}
-
-        this.rowData=this.pendientesPresentar;
-
-        this.gridOptions = {
-	        //enableSorting: true,
-	        //rowData: this.rowData,
-	        //columnDefs: this.columnDefs,				       
-		}
+		}      
 	}
-	private onRowSelected($event) {
+	private onRowSelect(event) {
         // taking out, as when we 'select all', it prints to much to the console!!
-        console.log('onRowSelected: ' + $event.node.data.TramNumero);
+        console.log('onRowSelected: ' + event.data.TramNumero);
 
-		this._tramiteService.getAllMovimientoTramite( $event.node.data.TrMoId)
+		this._tramiteService.getAllMovimientoTramite( event.data.TrMoId)
 			.subscribe(
 			data => { this.tramitesPendiente = data;			 
 						this.mostrarGrillaMovimiento();},//lo llamo aqui xq sino le pierde el estado
@@ -110,9 +76,6 @@ export class BandejaComponent {
 			() => this.isLoading = false
 			);
 
-    }
-	private onQuickFilterChanged($event) {
-        this.gridOptions.api.setQuickFilter($event.target.pendiente);
     }
 	mostrarGrillaMovimiento() {
 		this.pendientesPresentar2=[];
@@ -131,8 +94,6 @@ export class BandejaComponent {
 			);
 
 		}
-		 this.rowData2=this.pendientesPresentar2;
-
 	}
 	cargarBandeja(_valorRadio:number){
 		this.recibido=_valorRadio;
