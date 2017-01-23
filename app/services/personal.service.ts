@@ -14,6 +14,12 @@ export class PersonalService {
 			.map((r: Response) => r.json() )             
 			.catch(this.handleError);
 	}
+	searchPersonalByTerm(termino: string) {
+	return this.http
+			.get(this.baseUrl+"getrhppersobyterm?term="+termino) 
+			.map((r: Response) => r.json() )             
+			.catch(this.handleError);
+	}
 
 	// this could also be a private method of the component class
 	handleError (error: any) {

@@ -111,52 +111,49 @@
 			<label for="lblAdjunto" class="col-lg-12 col-form-label col-form-label-sm">Destinatario Interno</label>
 			<div class="form-group row"  class="col-sm-7"  >
 				<div class="ui-grid-row">
-					<div class="col-lg-6 form-check form-check-inline">
+					<div class="col-lg-5 form-check form-check-inline">
 						<label class="form-check-label col-form-label-sm">
-							<input type="radio" name="personal_ie" class="form-check-input " ng-model="personal.interno" value="true">
+							<input type="radio" name="destinatario_ie" class="form-check-input " [(ngModel)]="personalDestinatario.internoExt"  value="0">
 							Interno
 						</label>
 						<label class="form-check-label col-form-label-sm">
-							<input type="radio" name="personal_ie"  class="form-check-input " ng-model="personal.interno" value="false">
+							<input type="radio" name="destinatario_ie"  class="form-check-input "  [(ngModel)]="personalDestinatario.internoExt" value="1">
 							Externo
 						</label>
 					</div>
-					<div  class="col-lg-6 form-check form-check-inline"><!---->
+					<div  class="col-lg-5 form-check form-check-inline"><!---->
 						<label class="form-check-label col-form-label-sm">
-							<input type="radio" name="personal_oc" class="form-check-input" ng-model="personal.copia" value="false">
+							<input type="radio" name="destinatario_oc" class="form-check-input"   [(ngModel)]="personalDestinatario.copiaOri" value="0">
 							Original
 						</label>
 						<label class="form-check-label col-form-label-sm">
-						<input type="radio" name="personal_oc" class="form-check-input" ng-model="personal.copia" value="true">
+						<input type="radio" name="destinatario_oc" class="form-check-input"  [(ngModel)]="personalDestinatario.copiaOri" value="1">
 							Copia
 						</label>
 					</div>
+					
 				</div>
 				<div class="form-group">
-					<div>
-						<label for="lblObserva" class="col-lg-3 col-form-label col-form-label-sm">Observa</label>
+					<div >
+						<label for="lblDestinatario" class="col-lg-3 col-form-label col-form-label-sm" >Destinatario</label>
 						<div class="col-lg-9">
-							<input type="text"
-									class="form-control"
-									ng-model="personal.observa"
-									>
+							<input type="text" name="destiNombre"	class="form-control"  #searchBox id="search-box"  [(ngModel)]="personalDestinatario.destinatarioPersona" 
+							 (keyup)="searchPersonalByTerm($event,searchBox.value,op3)" placeholder="Buscar destinatario">
+							<!--aqui llama a OverlayPanel que esta mas abajo-->
+						</div>						
+					</div>
+					<div >
+						<label for="lblObserva" class="col-lg-3 col-form-label col-form-label-sm ">Observa</label>
+						<div class="col-lg-8">
+							<input type="text" name="destiObserva"	class="form-control " [(ngModel)]="personalDestinatario.observa">
 						</div>
 						
 					</div>
-					<div>
-						<label for="lblObserva" class="col-lg-3 col-form-label col-form-label-sm">Destinatario</label>
-						<div class="col-lg-8">
-							<input type="text"
-									class="form-control"
-									ng-model="personal.observa"
-									>
-						</div>
-						<button class="btn btn-info btn-sm col-lg-1" pButton icon="fa-plus-circle" ng-click="buscarInterno()">
-							
-						</button>
-					</div>
-
+					<button class="btn btn-info btn-sm col-lg-1" pButton icon="fa-plus-circle" ng-click="buscarInterno()">							
+					</button>
 				</div>
+				
+				
 				
 			</div>
 			<!--Mostrar listado de destinatarios-->
@@ -166,7 +163,7 @@
 						<div class="ui-helper-clearfix">
 							<!--<img src="showcase/resources/demo/images/car/{{car.brand}}.gif" style="display:inline-block;margin:2px 0 2px 2px" />-->
 							<button type="button" pButton (click)="deleteDestinatario(destinatario.Id)" icon="fa-trash" class="btn" style="display:inline-block;margin:2px 0 2px 2px"></button>
-							<div style="display:inline-block;font-size:14px;float:right;margin:15px 5px 0 0">{{destinatario.documento}} - {{destinatario.nombre}} - {{destinatario.lugar}}</div>
+							<div style="display:inline-block;font-size:14px;margin:15px 5px 0 0">{{destinatario.documento}} - {{destinatario.nombre}} - {{destinatario.lugar}}</div>
 						</div>
 						
 					</template>
@@ -186,3 +183,12 @@
 		</footer>
 	</form>
  </p-dialog>
+ <!--esto es para la consulta-->
+<p-overlayPanel #op3 >
+	<!--<div class="search-resultado">-->
+		<div *ngFor="let destinatario of destinatariosSearch | async"
+			(click)="SelectDestinatario(destinatario,op3)" class="search-resultado" >
+		{{destinatario.nombrecom}}
+		</div>
+	<!--</div>-->
+</p-overlayPanel>	

@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import { Subject }	from 'rxjs/Subject';
+import { Observable } from 'rxjs/Rx';
 // es para el datatable
-import {DataTableModule,SharedModule, OrderListModule,DataListModule} from 'primeng/primeng';
-import {ButtonModule,DialogModule} from 'primeng/primeng';
+import {DataTableModule,SharedModule, DataListModule} from 'primeng/primeng';
+import {ButtonModule,DialogModule,OverlayPanel} from 'primeng/primeng';
+
 import { TramiteService } from '../services/tramite.service';
 import { TipoDocumentoService } from '../services/tipoDocumento.service';
 import { PersonalService } from '../services/personal.service';
@@ -34,8 +36,14 @@ export class EnvioComponent implements OnInit {
 	private selectedEnvioPresentar: any;
 	private idEnvioPresentar:number;
 	private destinatarios:any = [];
+	private destinatariosSearch:any = [];
+	//private destinatarioSelect: any;
 	private destinatariosPresentar:any=[];
-
+	private searchTerms = new Subject<string>();
+	//Para agregar destinatario
+	  //Esto es para el destinatario
+    private personalDestinatario:any = {copiaOri:"0",internoExt: "0",id_zona:1, observa: "", destinatarioPersona:"",idPersona:""};
+   
 
 	constructor(private _tramiteService: TramiteService,
 	private _tipoDocumentoService: TipoDocumentoService,
@@ -50,9 +58,25 @@ export class EnvioComponent implements OnInit {
 
 	}
 	ngOnInit(){
-			this.codCap='4004';	
-			this.getAllEmitidos(this.codCap);
-			//this.mostrarGrillaEmitido() ;
+		this.codCap='4004';	
+		this.getAllEmitidos(this.codCap);
+		//this.mostrarGrillaEmitido() ;		
+
+		//Para el termino de searchTerms
+		this.destinatariosSearch = this.searchTerms
+								.debounceTime(300)        // wait for 300ms pause in events
+								.distinctUntilChanged()   // ignore if next search term is same as previous
+								.switchMap(term => term   // switch to new observable each time
+								// return the http search observable
+								? this._personalService.searchPersonalByTerm(term)
+								// or the observable of empty heroes if no search term
+								: Observable.of<any[]>([]))
+								.catch(error => {
+								// TODO: real error handling
+								console.log(error);
+								return Observable.of<any[]>([]);
+								});
+
 
 	}
 	getAllEmitidos(codcap: string) {
@@ -103,6 +127,15 @@ export class EnvioComponent implements OnInit {
 			this.mostrarCtrlEnvio = false;
 			this.muestraEnviar = false;
 		}
+		//inicializando los datos del formulario de destinatario		
+		this.personalDestinatario.copiaOri = "0";
+		this.personalDestinatario.internoExt = "0";
+		this.personalDestinatario.id_zona = 1; //Es la Zona de usuario actulmente logueado
+		this.personalDestinatario.observa = "";
+		this.personalDestinatario.idPersona="";
+		this.personalDestinatario.destinatarioPersona="";
+		/*this.personalDestinatario = {};*/
+		
 		   
 	}
 	addEmitido(codcap: string) {
@@ -174,6 +207,18 @@ export class EnvioComponent implements OnInit {
 				() => this.isLoading = false
 			);
 
+	}
+	//Busqueda por termino de busqueda Destinatario
+	searchPersonalByTerm(event,termino: string, overlaypanel: OverlayPanel): void {
+    this.searchTerms.next(termino);
+	 overlaypanel.toggle(event);
+
+	}
+	SelectDestinatario(destinatarioSelect: any,overlaypanel: OverlayPanel){
+		this.personalDestinatario.idPersona=destinatarioSelect.id_persona;
+		this.personalDestinatario.destinatarioPersona=destinatarioSelect.nombrecom;
+		 //overlaypanel.toggle(event);
+		 overlaypanel.hide();
 	}
 	mostrarGrillaDestinatario(){
 		this.destinatariosPresentar=[];

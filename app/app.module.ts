@@ -6,8 +6,8 @@ import { HttpModule }    from '@angular/http';
 import {AgGridModule} from 'ag-grid-ng2/main';
 
 //Esto lo uso para la grilla
-import {DataTableModule,SharedModule,OrderListModule,DataListModule} from 'primeng/primeng';
-import {ButtonModule,DialogModule} from 'primeng/primeng';
+import {DataTableModule,SharedModule,DataListModule} from 'primeng/primeng';
+import {ButtonModule,DialogModule,OverlayPanelModule} from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes.component';
@@ -24,7 +24,7 @@ import { DestinatarioService } from './services/destinatario.service';
 
 
 @NgModule({
-  imports:      [ BrowserModule ,  FormsModule, HttpModule, routing,AgGridModule.withNg2ComponentSupport(),DataTableModule,SharedModule, ButtonModule,DialogModule,OrderListModule, DataListModule],
+  imports:      [ BrowserModule ,  FormsModule, HttpModule, routing,AgGridModule.withNg2ComponentSupport(),DataTableModule,SharedModule, ButtonModule,DialogModule, DataListModule,OverlayPanelModule],
   declarations: [ AppComponent,HeroesComponent, HeroDetailComponent, DashboardComponent,BandejaComponent,EnvioComponent ],
   providers: [  HeroService, TramiteService, TipoDocumentoService, PersonalService, DestinatarioService ],
   bootstrap:    [ AppComponent]

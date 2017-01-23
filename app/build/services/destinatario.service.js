@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-var Rx_1 = require("rxjs/Rx");
+var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
+var Rx_1 = require('rxjs/Rx');
 var DestinatarioService = (function () {
     function DestinatarioService(http) {
         this.http = http;
@@ -24,7 +24,7 @@ var DestinatarioService = (function () {
     };
     // delete Destinatario
     DestinatarioService.prototype.deleteDestinatario = function (id) {
-        return this.http.post(this.baseUrl + "delete/", id) // ...using post request
+        return this.http.delete(this.baseUrl + "delete/" + id) // ...using post request
             .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
             .catch(function (error) { return Rx_1.Observable.throw(error.json().error || 'Server error'); }); //...errors if any
     };
@@ -42,11 +42,11 @@ var DestinatarioService = (function () {
         // throw an application level error
         return Rx_1.Observable.throw(errorMsg);
     };
+    DestinatarioService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], DestinatarioService);
     return DestinatarioService;
 }());
-DestinatarioService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
-], DestinatarioService);
 exports.DestinatarioService = DestinatarioService;
 //# sourceMappingURL=destinatario.service.js.map

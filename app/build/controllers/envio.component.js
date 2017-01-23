@@ -8,11 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var tramite_service_1 = require("../services/tramite.service");
-var tipoDocumento_service_1 = require("../services/tipoDocumento.service");
-var personal_service_1 = require("../services/personal.service");
-var destinatario_service_1 = require("../services/destinatario.service");
+var core_1 = require('@angular/core');
+var Subject_1 = require('rxjs/Subject');
+var Rx_1 = require('rxjs/Rx');
+var tramite_service_1 = require('../services/tramite.service');
+var tipoDocumento_service_1 = require('../services/tipoDocumento.service');
+var personal_service_1 = require('../services/personal.service');
+var destinatario_service_1 = require('../services/destinatario.service');
 var EnvioComponent = (function () {
     function EnvioComponent(_tramiteService, _tipoDocumentoService, _personalService, _destinatarioService) {
         /*  this.columnDefs = [
@@ -35,12 +37,31 @@ var EnvioComponent = (function () {
         //propiedades de modal
         this.displayDialog = false;
         this.destinatarios = [];
+        this.destinatariosSearch = [];
+        //private destinatarioSelect: any;
         this.destinatariosPresentar = [];
+        this.searchTerms = new Subject_1.Subject();
+        //Para agregar destinatario
+        //Esto es para el destinatario
+        this.personalDestinatario = { copiaOri: "0", internoExt: "0", id_zona: 1, observa: "", destinatarioPersona: "", idPersona: "" };
     }
     EnvioComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.codCap = '4004';
         this.getAllEmitidos(this.codCap);
-        //this.mostrarGrillaEmitido() ;
+        //this.mostrarGrillaEmitido() ;		
+        //Para el termino de searchTerms
+        this.destinatariosSearch = this.searchTerms
+            .debounceTime(300) // wait for 300ms pause in events
+            .distinctUntilChanged() // ignore if next search term is same as previous
+            .switchMap(function (term) { return term // switch to new observable each time
+            ? _this._personalService.searchPersonalByTerm(term)
+            : Rx_1.Observable.of([]); })
+            .catch(function (error) {
+            // TODO: real error handling
+            console.log(error);
+            return Rx_1.Observable.of([]);
+        });
     };
     EnvioComponent.prototype.getAllEmitidos = function (codcap) {
         var _this = this;
@@ -85,6 +106,14 @@ var EnvioComponent = (function () {
             this.mostrarCtrlEnvio = false;
             this.muestraEnviar = false;
         }
+        //inicializando los datos del formulario de destinatario		
+        this.personalDestinatario.copiaOri = "0";
+        this.personalDestinatario.internoExt = "0";
+        this.personalDestinatario.id_zona = 1; //Es la Zona de usuario actulmente logueado
+        this.personalDestinatario.observa = "";
+        this.personalDestinatario.idPersona = "";
+        this.personalDestinatario.destinatarioPersona = "";
+        /*this.personalDestinatario = {};*/
     };
     EnvioComponent.prototype.addEmitido = function (codcap) {
         var _this = this;
@@ -142,6 +171,17 @@ var EnvioComponent = (function () {
             _this.mostrarGrillaDestinatario();
         }, function (err) { _this.errorMessage = err; }, function () { return _this.isLoading = false; });
     };
+    //Busqueda por termino de busqueda Destinatario
+    EnvioComponent.prototype.searchPersonalByTerm = function (event, termino, overlaypanel) {
+        this.searchTerms.next(termino);
+        overlaypanel.toggle(event);
+    };
+    EnvioComponent.prototype.SelectDestinatario = function (destinatarioSelect, overlaypanel) {
+        this.personalDestinatario.idPersona = destinatarioSelect.id_persona;
+        this.personalDestinatario.destinatarioPersona = destinatarioSelect.nombrecom;
+        //overlaypanel.toggle(event);
+        overlaypanel.hide();
+    };
     EnvioComponent.prototype.mostrarGrillaDestinatario = function () {
         this.destinatariosPresentar = [];
         var _valorDoc = "";
@@ -181,16 +221,14 @@ var EnvioComponent = (function () {
             });
         }
     };
+    EnvioComponent = __decorate([
+        core_1.Component({
+            selector: 'envio',
+            templateUrl: 'app/views/envio.component.html'
+        }), 
+        __metadata('design:paramtypes', [tramite_service_1.TramiteService, tipoDocumento_service_1.TipoDocumentoService, personal_service_1.PersonalService, destinatario_service_1.DestinatarioService])
+    ], EnvioComponent);
     return EnvioComponent;
 }());
-EnvioComponent = __decorate([
-    core_1.Component({
-        selector: 'envio',
-        templateUrl: 'app/views/envio.component.html'
-    }),
-    __metadata("design:paramtypes", [tramite_service_1.TramiteService,
-        tipoDocumento_service_1.TipoDocumentoService,
-        personal_service_1.PersonalService, destinatario_service_1.DestinatarioService])
-], EnvioComponent);
 exports.EnvioComponent = EnvioComponent;
 //# sourceMappingURL=envio.component.js.map
