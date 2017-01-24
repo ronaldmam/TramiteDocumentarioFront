@@ -3,6 +3,7 @@ import {AgGridModule} from 'ag-grid-ng2/main';
 import {GridOptions} from 'ag-grid/main';
 // Componentes de primefaces
 import {DataTableModule} from 'primeng/primeng';
+import {ButtonModule} from 'primeng/primeng';
 
 import { TramiteService } from '../services/tramite.service';
 @Component({
@@ -16,11 +17,18 @@ export class BandejaComponent {
 	private supervisor:number;
 	private tramitesPendiente:any=[];
 	private pendientesPresentar:any = [];
+	private selectedPendientePresentar:any;
 	private pendientesPresentar2:any = [];
 	private errorMessage:string='';
 	private isLoading: boolean = true;
 	private bandeja:number
-
+	private bandejas = [
+		{ value: 0, display: 'Pendiente' },
+		{ value: 1, display: 'Recibido' }
+	];
+	//para guardar la seleccion de la primera grilla
+	private trMovId:number;
+    private tramId:number;
 
 	constructor(private _tramiteService: TramiteService){	
 	
@@ -46,7 +54,7 @@ export class BandejaComponent {
 		//this.mostrarGrillaPendiente() ;
 
 	}
-	mostrarGrillaPendiente() {
+	private mostrarGrillaPendiente() {
 		this.pendientesPresentar=[];
 		let _valorDoc:string="";
 		for(let pendiente of this.tramitesPendiente ){
@@ -67,7 +75,8 @@ export class BandejaComponent {
 	private onRowSelect(event) {
         // taking out, as when we 'select all', it prints to much to the console!!
         console.log('onRowSelected: ' + event.data.TramNumero);
-
+		this.trMovId=event.data.TrMoId;
+		this.tramId=event.data.Id
 		this._tramiteService.getAllMovimientoTramite( event.data.TrMoId)
 			.subscribe(
 			data => { this.tramitesPendiente = data;			 
@@ -77,7 +86,7 @@ export class BandejaComponent {
 			);
 
     }
-	mostrarGrillaMovimiento() {
+	private mostrarGrillaMovimiento() {
 		this.pendientesPresentar2=[];
 		let _valorDoc:string="";
 		for(let pendiente of this.tramitesPendiente ){
@@ -100,8 +109,14 @@ export class BandejaComponent {
 		this.getAllPendiente(this.idCap,this.idUsuario,this.recibido.toString(),this.supervisor);
 
 	}
-	private bandejas = [
-		{ value: 0, display: 'Pendiente' },
-		{ value: 1, display: 'Recibido' }
-	];
+	recepcionarTramite(){
+			this._tramiteService.recepcionarTramiteMov(this.tramId,this.trMovId,this.idUsuario)
+			.subscribe(
+			data => { 			 
+						this.getAllPendiente(this.idCap,this.idUsuario,this.recibido.toString(),this.supervisor);},//lo llamo aqui xq sino le pierde el estado
+			err => { this.errorMessage = err },
+			() => this.isLoading = false
+			);
+	}
+
 }

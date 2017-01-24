@@ -11,33 +11,18 @@
                     <label><input type="radio" name="bande" [value]="bande.value" [(ngModel)]="bandeja" checked (change)="cargarBandeja(bande.value)"/> {{bande.display}}</label>                    
                     
                 </span>
+                 <button (click)="recepcionarTramite()"  ng-hide="recibido"
+                         pButton icon="fa-arrow-circle-down" label="Recibir">                   
+                </button>
+                <button (click)="derivarTramiteMov()"
+                         pButton icon="fa-users" label="Derivar"> 
+                   
+                </button>
+                <button (click)="archivarTramiteMov()"
+                        pButton icon="fa-files-o" label="Archivar">                    
+                </button>
             </div>
-      <!--<div class="col-lg-7" style="text-align:right">
-                <button ng-click="RecepcionarTramite()"  ng-hide="recibido"
-                        class="btn btn-succes" ng-disabled="btnRecibir">
-                    <i class="glyphicon glyphicon-plus"></i> Recibir
-                </button>
-                <button ng-click="DerivarTramiteMov()"
-                        class="btn btn-succes">
-                    <i class="glyphicon glyphicon-plus"></i> Derivar
-                </button>
-                <button ng-click="ArchivarTramiteMov()"
-                        class="btn btn-succes">
-                    <i class="glyphicon glyphicon-plus"></i> Archivar
-                </button>
-            </div>-->
             <div class="card-text">          
-                <!--<ag-grid-ng2 #agGrid style="height:250px;width: 100%" class="ag-blue "
-                    [gridOptions]="gridOptions"
-                    [columnDefs]="columnDefs"               
-                    [rowData]="rowData"
-                    enableSorting
-                    enableFilter 
-                    rowSelection="single"
-                    (rowSelected)="onRowSelected($event)"              
-                    >
-
-                </ag-grid-ng2>-->
                 <p-dataTable [value]="pendientesPresentar" [rows]="10" [paginator]="true"  
                 [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="filtroGlobal" scrollable="true"  scrollWidth="100%"
                 selectionMode="single" [(selection)]="selectedPendientePresentar" (onRowSelect)="onRowSelect($event)">
@@ -56,19 +41,7 @@
         <div class="card-header">  Movimientos de Tramite   </div>
         <div class="card-block" style="padding:3">
            <!-- <input placeholder="Buscar..." type="text" ng-model="gridOptions.quickFilterText" />-->
-
-           <!-- <div ag-grid="gridOptions2" style="height:250px" class="ag-blue"></div>-->
          <div class="card-text">  
-          <!-- <ag-grid-ng2 #agGrid style="height:250px;width: 100%" class="ag-blue"
-                [gridOptions]="gridOptions2"
-                [columnDefs]="columnDefs2"               
-                [rowData]="rowData2"
-                enableSorting
-                enableFilter 
-                rowSelection="single"
-                              
-                >
-            </ag-grid-ng2>-->
              <p-dataTable [value]="pendientesPresentar2" [rows]="10" [paginator]="true"  
                 [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="filtroGlobal" scrollable="true"  scrollWidth="100%"
                 >

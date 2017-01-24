@@ -69,6 +69,13 @@ export class TramiteService {
 						.catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
 	}
 
+	recepcionarTramiteMov(tramId:number, trMovid:number, usuarioLog:string){
+		return this.http
+			.get(this.baseUrl2+ "recepcionartramitemov?tramId=" + tramId + "&trMovid=" + trMovid + "&usuarioLog=" + usuarioLog)
+			.map((r: Response) => r.json() )
+			.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+	}
+
 	// this could also be a private method of the component class
 	handleError (error: any) {
 	// log error

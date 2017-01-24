@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { routing } from './app.routing';
 import { HttpModule }    from '@angular/http';
-import {AgGridModule} from 'ag-grid-ng2/main';
+//import {AgGridModule} from 'ag-grid-ng2/main';
 
 //COmponentes primefaces// Esto lo uso para la grilla
 import {DataTableModule,SharedModule,DataListModule} from 'primeng/primeng';
@@ -25,7 +25,7 @@ import { DestinatarioService } from './services/destinatario.service';
 
 
 @NgModule({
-  imports:      [ BrowserModule ,  FormsModule, HttpModule, routing,AgGridModule.withNg2ComponentSupport(),
+  imports:      [ BrowserModule ,  FormsModule, HttpModule, routing,//AgGridModule.withNg2ComponentSupport(),
                 DataTableModule,SharedModule, ButtonModule,DialogModule, DataListModule,OverlayPanelModule,ConfirmDialogModule,GrowlModule],
   declarations: [ AppComponent,HeroesComponent, HeroDetailComponent, DashboardComponent,BandejaComponent,EnvioComponent ],
   providers: [  HeroService, TramiteService, TipoDocumentoService, PersonalService, DestinatarioService ],

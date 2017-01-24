@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var tramite_service_1 = require("../services/tramite.service");
+var core_1 = require('@angular/core');
+var tramite_service_1 = require('../services/tramite.service');
 var BandejaComponent = (function () {
     function BandejaComponent(_tramiteService) {
         this._tramiteService = _tramiteService;
@@ -62,6 +62,8 @@ var BandejaComponent = (function () {
         var _this = this;
         // taking out, as when we 'select all', it prints to much to the console!!
         console.log('onRowSelected: ' + event.data.TramNumero);
+        this.trMovId = event.data.TrMoId;
+        this.tramId = event.data.Id;
         this._tramiteService.getAllMovimientoTramite(event.data.TrMoId)
             .subscribe(function (data) {
             _this.tramitesPendiente = data;
@@ -90,14 +92,23 @@ var BandejaComponent = (function () {
         this.recibido = _valorRadio;
         this.getAllPendiente(this.idCap, this.idUsuario, this.recibido.toString(), this.supervisor);
     };
+    BandejaComponent.prototype.recepcionarTramite = function () {
+        var _this = this;
+        this._tramiteService.recepcionarTramiteMov(this.tramId, this.trMovId, this.idUsuario)
+            .subscribe(function (data) {
+            _this.getAllPendiente(_this.idCap, _this.idUsuario, _this.recibido.toString(), _this.supervisor);
+        }, //lo llamo aqui xq sino le pierde el estado
+        function (//lo llamo aqui xq sino le pierde el estado
+            err) { _this.errorMessage = err; }, function () { return _this.isLoading = false; });
+    };
+    BandejaComponent = __decorate([
+        core_1.Component({
+            selector: 'bandeja',
+            templateUrl: 'app/views/bandeja.component.html'
+        }), 
+        __metadata('design:paramtypes', [tramite_service_1.TramiteService])
+    ], BandejaComponent);
     return BandejaComponent;
 }());
-BandejaComponent = __decorate([
-    core_1.Component({
-        selector: 'bandeja',
-        templateUrl: 'app/views/bandeja.component.html'
-    }),
-    __metadata("design:paramtypes", [tramite_service_1.TramiteService])
-], BandejaComponent);
 exports.BandejaComponent = BandejaComponent;
 //# sourceMappingURL=bandeja.component.js.map

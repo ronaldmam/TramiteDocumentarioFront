@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-var Rx_1 = require("rxjs/Rx");
+var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
+var Rx_1 = require('rxjs/Rx');
 var TipoDocumentoService = (function () {
     //private baseUrl2: string = 'http://localhost:8081/TramiteDocumentarioJava/rest/tramitesmovi/';
     function TipoDocumentoService(http) {
@@ -32,11 +32,11 @@ var TipoDocumentoService = (function () {
         // throw an application level error
         return Rx_1.Observable.throw(errorMsg);
     };
+    TipoDocumentoService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], TipoDocumentoService);
     return TipoDocumentoService;
 }());
-TipoDocumentoService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
-], TipoDocumentoService);
 exports.TipoDocumentoService = TipoDocumentoService;
 //# sourceMappingURL=tipoDocumento.service.js.map

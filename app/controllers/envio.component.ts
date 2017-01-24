@@ -55,13 +55,7 @@ export class EnvioComponent implements OnInit {
 	private _tipoDocumentoService: TipoDocumentoService,
 	private _personalService: PersonalService,private _destinatarioService: DestinatarioService,
 	private _confirmationService: ConfirmationService){ 
-	/*  this.columnDefs = [
-				{ header: "TramNumero", field: "TramNumero"},
-				{ header: "NombreEmisor", field: "NombreEmisor", sortable:"true"},
-				{ header: "TramFecha", field: "TramFecha"},
-				{ header: "TramAsunto", field: "TramAsunto"},
-				{ header: "TiDocAbrevia", field: "TiDocAbrevia"},
-			];*/
+
 
 	}
 	ngOnInit(){
