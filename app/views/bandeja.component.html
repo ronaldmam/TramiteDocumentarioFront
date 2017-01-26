@@ -56,3 +56,76 @@
    
     </div>
 </div>
+
+<!--Ventana modal de Derivacion-->
+<p-dialog [header]="headerTitle" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" contentHeight="200"  >
+	<div class="form-group row ">
+		<div class="form-group">
+			<label for="lblFecha" class="col-lg-2 col-form-label col-form-label-sm">Derivar a:</label>
+			<div class="col-lg-6">
+				<input type="text"
+						class="form-control form-control-md"
+						[(ngModel)]="nombrePersonal"
+						ng-required="true"  placeholder="Busqueda de Personal" #searchBox  id="search-box" 
+						(keyup)="searchPersonalByTerm($event,searchBox.value,op3)">
+						<!--aqui llama a OverlayPanel que esta mas abajo-->
+			</div>
+			<div class="col-lg-4">
+				<input type="text"
+						class="form-control form-control-md"
+						[(ngModel)]="nombreCAPS"
+						ng-required="true" placeholder="CAPS " disabled>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="lblFecha" class="col-lg-2 col-form-label col-form-label-sm">Accion:</label>
+			<div class="col-lg-3">
+				<select  name="TipoAccion1" [(ngModel)]="tramiteMov.TiAcId1"
+						class="form-control form-control-md" >
+					<option *ngFor="let tipoAccion of tipoAcciones1" [ngValue]="tipoAccion.Id">{{tipoAccion.TiAcNombre}}</option>
+				</select>
+
+			</div>
+			<div class="col-lg-3">
+				<select  name="TipoAccion2" [(ngModel)]="tramiteMov.TiAcId2"
+						class="form-control form-control-md" >
+					<option *ngFor="let tipoAccion of tipoAcciones2" [ngValue]="tipoAccion.Id">{{tipoAccion.TiAcNombre}}</option>
+				</select>			
+			</div>
+			<div class="col-lg-4">
+				<select  name="TipoAccion3" [(ngModel)]="tramiteMov.TiAcId3"
+						class="form-control form-control-md" >
+					<option *ngFor="let tipoAccion of tipoAcciones3" [ngValue]="tipoAccion.Id">{{tipoAccion.TiAcNombre}}</option>
+				</select>	
+				
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="lblFecha" class="col-lg-2 col-form-label col-form-label-sm">Observacion:</label>
+			<div class="col-lg-10">
+				<textarea class="col-lg-10 form-control" [(ngModel)]="tramiteMov.TrMoObserva"></textarea>
+			</div>
+		</div>
+
+	</div>
+	<!--Pie de pagina-->
+	<footer>
+		<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+			 <button type="button"                    
+					(click)="derivarTramite()"
+					ng-disabled="form.$invalid"
+                    class="btn btn-success">
+                Guardar
+            </button>
+		</div>
+	</footer>
+ </p-dialog>
+  <!--esto es para la consulta-->
+<p-overlayPanel #op3 >
+	<!--<div class="search-resultado">-->
+		<div *ngFor="let personal of personalesSearch | async "
+			(click)="selectPersonal(personal,op3)" class="search-resultado" >
+		{{personal.nombrecom}}
+		</div>
+	<!--</div>-->
+</p-overlayPanel>

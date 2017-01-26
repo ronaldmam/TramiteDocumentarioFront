@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http ,Response} from '@angular/http';
+import { Headers, Http ,Response,RequestOptions} from '@angular/http';
 import '../rxjs-extensions';
 import { Observable } from 'rxjs/Rx';
 
@@ -74,6 +74,27 @@ export class TramiteService {
 			.get(this.baseUrl2+ "recepcionartramitemov?tramId=" + tramId + "&trMovid=" + trMovid + "&usuarioLog=" + usuarioLog)
 			.map((r: Response) => r.json() )
 			.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+	}
+	newTramiteMovi(){
+		return this.http
+			.get(this.baseUrl2+ 'new')
+			.map((r: Response) => r.json() )
+			.catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+
+	}
+	derivarTramiteMov(tramiteMov:Object){
+		let headers = new Headers({
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': '*',
+					 'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers':'X-Requested-With'	
+  		 			 });
+
+	    let options = new RequestOptions({ headers: headers });
+
+			return this.http.post(this.baseUrl2+ "derivar", tramiteMov,options) // ...using post request
+						.map((res:Response) => res.json()) // ...and calling .json() on the response to return data
+						.catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
 	}
 
 	// this could also be a private method of the component class

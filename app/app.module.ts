@@ -22,13 +22,15 @@ import { TramiteService } from './services/tramite.service';
 import { TipoDocumentoService } from './services/tipoDocumento.service';
 import { PersonalService } from './services/personal.service';
 import { DestinatarioService } from './services/destinatario.service';
+import { TipoAccionService } from './services/tipoAccion.service';
+
 
 
 @NgModule({
   imports:      [ BrowserModule ,  FormsModule, HttpModule, routing,//AgGridModule.withNg2ComponentSupport(),
                 DataTableModule,SharedModule, ButtonModule,DialogModule, DataListModule,OverlayPanelModule,ConfirmDialogModule,GrowlModule],
   declarations: [ AppComponent,HeroesComponent, HeroDetailComponent, DashboardComponent,BandejaComponent,EnvioComponent ],
-  providers: [  HeroService, TramiteService, TipoDocumentoService, PersonalService, DestinatarioService ],
+  providers: [  HeroService, TramiteService, TipoDocumentoService, PersonalService, DestinatarioService,TipoAccionService ],
   bootstrap:    [ AppComponent]
 })
 export class AppModule { 

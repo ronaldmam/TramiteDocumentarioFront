@@ -31,14 +31,14 @@ export class EnvioComponent implements OnInit {
 	private errorMessage:string='';
 	//propiedades de modal
 	private displayDialog: boolean=false;
+	private headerTitle:string;
 	//mesage popup
 	 msgs: Message[] = [];
-	//propieadades de la ng-grid
-	private columnDefs:any[];
+
 	//propiedades del formulario agregar o Editar
 	private mostrarCtrlEnvio:boolean;
 	private muestraEnviar:boolean;
-	private headerTitle:string;
+	
 	private selectedEnvioPresentar: any;
 	private idEnvioPresentar:number;
 	private destinatarios:any = [];
