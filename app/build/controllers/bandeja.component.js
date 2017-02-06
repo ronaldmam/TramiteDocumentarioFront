@@ -8,12 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var Subject_1 = require('rxjs/Subject');
-var Rx_1 = require('rxjs/Rx');
-var tramite_service_1 = require('../services/tramite.service');
-var tipoAccion_service_1 = require('../services/tipoAccion.service');
-var personal_service_1 = require('../services/personal.service');
+var core_1 = require("@angular/core");
+var Subject_1 = require("rxjs/Subject");
+var Rx_1 = require("rxjs/Rx");
+var tramite_service_1 = require("../services/tramite.service");
+var tipoAccion_service_1 = require("../services/tipoAccion.service");
+var personal_service_1 = require("../services/personal.service");
 var BandejaComponent = (function () {
     function BandejaComponent(_tramiteService, _tipoAccionService, _personalService) {
         this._tramiteService = _tramiteService;
@@ -190,14 +190,15 @@ var BandejaComponent = (function () {
             console.log(err); // Log errors if any
         });
     };
-    BandejaComponent = __decorate([
-        core_1.Component({
-            selector: 'bandeja',
-            templateUrl: 'app/views/bandeja.component.html'
-        }), 
-        __metadata('design:paramtypes', [tramite_service_1.TramiteService, tipoAccion_service_1.TipoAccionService, personal_service_1.PersonalService])
-    ], BandejaComponent);
     return BandejaComponent;
 }());
+BandejaComponent = __decorate([
+    core_1.Component({
+        selector: 'bandeja',
+        templateUrl: 'app/views/bandeja.component.html'
+    }),
+    __metadata("design:paramtypes", [tramite_service_1.TramiteService,
+        tipoAccion_service_1.TipoAccionService, personal_service_1.PersonalService])
+], BandejaComponent);
 exports.BandejaComponent = BandejaComponent;
 //# sourceMappingURL=bandeja.component.js.map

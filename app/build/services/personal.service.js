@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var Rx_1 = require('rxjs/Rx');
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var Rx_1 = require("rxjs/Rx");
 var PersonalService = (function () {
     function PersonalService(http) {
         this.http = http;
@@ -37,11 +37,11 @@ var PersonalService = (function () {
         // throw an application level error
         return Rx_1.Observable.throw(errorMsg);
     };
-    PersonalService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], PersonalService);
     return PersonalService;
 }());
+PersonalService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], PersonalService);
 exports.PersonalService = PersonalService;
 //# sourceMappingURL=personal.service.js.map

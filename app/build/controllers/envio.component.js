@@ -8,14 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var Subject_1 = require('rxjs/Subject');
-var Rx_1 = require('rxjs/Rx');
-var primeng_1 = require('primeng/primeng');
-var tramite_service_1 = require('../services/tramite.service');
-var tipoDocumento_service_1 = require('../services/tipoDocumento.service');
-var personal_service_1 = require('../services/personal.service');
-var destinatario_service_1 = require('../services/destinatario.service');
+var core_1 = require("@angular/core");
+var Subject_1 = require("rxjs/Subject");
+var Rx_1 = require("rxjs/Rx");
+var primeng_1 = require("primeng/primeng");
+var tramite_service_1 = require("../services/tramite.service");
+var tipoDocumento_service_1 = require("../services/tipoDocumento.service");
+var personal_service_1 = require("../services/personal.service");
+var destinatario_service_1 = require("../services/destinatario.service");
 var EnvioComponent = (function () {
     function EnvioComponent(_tramiteService, _tipoDocumentoService, _personalService, _destinatarioService, _confirmationService) {
         this._tramiteService = _tramiteService;
@@ -303,15 +303,18 @@ var EnvioComponent = (function () {
             console.log(err); // Log errors if any
         });
     };
-    EnvioComponent = __decorate([
-        core_1.Component({
-            selector: 'envio',
-            templateUrl: 'app/views/envio.component.html',
-            providers: [primeng_1.ConfirmationService]
-        }), 
-        __metadata('design:paramtypes', [tramite_service_1.TramiteService, tipoDocumento_service_1.TipoDocumentoService, personal_service_1.PersonalService, destinatario_service_1.DestinatarioService, primeng_1.ConfirmationService])
-    ], EnvioComponent);
     return EnvioComponent;
 }());
+EnvioComponent = __decorate([
+    core_1.Component({
+        selector: 'envio',
+        templateUrl: 'app/views/envio.component.html',
+        providers: [primeng_1.ConfirmationService]
+    }),
+    __metadata("design:paramtypes", [tramite_service_1.TramiteService,
+        tipoDocumento_service_1.TipoDocumentoService,
+        personal_service_1.PersonalService, destinatario_service_1.DestinatarioService,
+        primeng_1.ConfirmationService])
+], EnvioComponent);
 exports.EnvioComponent = EnvioComponent;
 //# sourceMappingURL=envio.component.js.map
